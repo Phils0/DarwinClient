@@ -5,6 +5,8 @@ foreach ($f in $files){
     $schemas = $schemas + " " +  $f.Name; 
 }
 
+# Add dummy schema so output class file called schemaV16.cs
+# See https://stackoverflow.com/a/33906829/3805124
 $schemas = $schemas + " .\dummy\schemaV16.xsd /c /n:DarwinClient.SchemaV16";
 
 Write-Output $schemas;
