@@ -9,20 +9,29 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.101" />
+        <PackageReference Include="AWSSDK.S3" Version="3.3.110.61" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.4" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
         <PackageReference Include="NSubstitute" Version="4.2.1" />
+        <PackageReference Include="ReflectionMagic" Version="4.1.0" />
         <PackageReference Include="Serilog" Version="2.9.0" />
-        <PackageReference Include="xunit" Version="2.4.0" />
+        <PackageReference Include="Serilog.Sinks.XUnit" Version="2.0.4" />
+        <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
         <PackageReference Include="coverlet.collector" Version="1.2.0" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Data\20200415020643_ref_v3.xml.gz" />
-      <None Update="Data\20200417020641_ref_v3.xml.gz">
+      <None Update="Data\20200429020643_ref_v3.xml.gz">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Data\20200417020641_v8.xml.gz">
+      <None Update="Data\20200429020643_v8.xml.gz">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
