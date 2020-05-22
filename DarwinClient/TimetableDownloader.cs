@@ -95,7 +95,9 @@ namespace DarwinClient
         private PportTimetableRef ExtractRefData(Stream stream, string name)
         {
             var extractor = new ReferenceDataExtractor(_log);
-            return extractor.Deserialize(stream, name);
+            var data = extractor.Deserialize(stream, name);
+            data.File = name;
+            return data;
         }
         
         private static readonly string AllRefFiles = $"\\d+_ref_v{ReferenceVersion.V3}";
@@ -134,7 +136,9 @@ namespace DarwinClient
         private PportTimetable ExtractTimetable(Stream stream, string name)
         {
             var extractor = new TimetableExtractor(_log);
-            return extractor.Deserialize(stream, name);
+            var data = extractor.Deserialize(stream, name);
+            data.File = name;
+            return data;
         }
         
         private static readonly string AllTimetableFiles = $"\\d+_v{TimetableVersion.V8}";
