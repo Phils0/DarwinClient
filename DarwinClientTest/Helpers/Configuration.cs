@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace DarwinClient.Test
+namespace DarwinClient.Test.Helpers
 {
     public static class Configuration
     {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon.S3.Model;
 using DarwinClient.SchemaV16;
+using DarwinClient.Serialization;
 using Serilog;
 
 namespace DarwinClient
@@ -94,7 +95,7 @@ namespace DarwinClient
 
         private PportTimetableRef ExtractRefData(Stream stream, string name)
         {
-            var extractor = new ReferenceDataExtractor(_log);
+            var extractor = new ReferenceDataDeserializer(_log);
             var data = extractor.Deserialize(stream, name);
             data.File = name;
             return data;
@@ -135,7 +136,7 @@ namespace DarwinClient
         
         private PportTimetable ExtractTimetable(Stream stream, string name)
         {
-            var extractor = new TimetableExtractor(_log);
+            var extractor = new TimetableDeserializer(_log);
             var data = extractor.Deserialize(stream, name);
             data.File = name;
             return data;

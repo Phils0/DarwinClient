@@ -1,7 +1,7 @@
 ﻿using Amazon.S3;
 using Microsoft.Extensions.Configuration;
 
-namespace DarwinClient.Test
+namespace DarwinClient.Test.Helpers
 {
     public static class Amazon
     {

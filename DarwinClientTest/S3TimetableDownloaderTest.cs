@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using DarwinClient.Test.Helpers;
 using NSubstitute;
 using Serilog;
 using Xunit;
@@ -15,16 +16,13 @@ namespace DarwinClient.Test
         public S3TimetableDownloaderTest(ITestOutputHelper testOutputHelper)
         {
             _testOutputHelper = testOutputHelper;
-            _logger = new LoggerConfiguration()
-                .MinimumLevel.Verbose()
-                .WriteTo.TestOutput(testOutputHelper)
-                .CreateLogger();
+            _logger = LoggingHelper.CreateLogger(testOutputHelper);
         }
 
         [Fact(Skip = "Actual S3 calls, needs profile set")]
         public async void RealDownloadSpecificReferenceData()
         {
-            var client = Amazon.GetS3Client();
+            var client = Helpers.Amazon.GetS3Client();
             var downloader = new S3TimetableDownloader(client, _logger);
 
             var refData =  await downloader.GetReference(DateTime.Today, CancellationToken.None);
@@ -59,7 +57,7 @@ namespace DarwinClient.Test
         [Fact(Skip = "Actual S3 calls, needs profile set")]
         public async void RealDownloadSpecificTimetable()
         {
-            var client = Amazon.GetS3Client();
+            var client = Helpers.Amazon.GetS3Client();
             var downloader = new S3TimetableDownloader(client, _logger);
 
             var timetable =  await downloader.GetTimetable(DateTime.Today, CancellationToken.None);

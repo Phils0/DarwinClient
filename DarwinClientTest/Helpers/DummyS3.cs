@@ -8,12 +8,13 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using NSubstitute;
 
-namespace DarwinClient.Test
+namespace DarwinClient.Test.Helpers
 {
     public static class DummyS3
     {
         public static DateTime TestDate = new DateTime(2020, 4, 29);
         public static string ReferenceData = Path.Combine(".", "Data", "20200429020643_ref_v3.xml.gz");
+        public static string ReferenceDataV2 = Path.Combine(".", "Data", "20200415020643_ref_v2.xml.gz");
         public static string Timetable = Path.Combine(".", "Data", "20200429020643_v8.xml.gz");
 
         public static List<S3Object> DarwinFiles => new List<S3Object>()
