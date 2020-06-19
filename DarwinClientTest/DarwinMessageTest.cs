@@ -40,5 +40,15 @@ namespace DarwinClient.Test
             Assert.Equal("", msg.PushportSequence);
             Assert.Equal(MessageTypes.Unknown, msg.MessageType);
         }
+        
+        [Fact]
+        public void PportReferencesMessage()
+        {            
+            var activeMqMsg = MessageGenerator.CreateByteMessage();
+            var content = new Pport();
+            var msg = new DarwinMessage(content, activeMqMsg);
+            
+            Assert.Same(msg, msg.Updates.Message);
+        }
     }
 }

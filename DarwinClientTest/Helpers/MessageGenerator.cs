@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Apache.NMS;
+using DarwinClient.SchemaV16;
+using DarwinClient.Serialization;
 using NSubstitute;
+using Serilog;
 
 namespace DarwinClient.Test.Helpers
 {
@@ -21,15 +24,21 @@ namespace DarwinClient.Test.Helpers
 
         public static IBytesMessage CreateByteMessage(string sequence = TestMessage.PushportSequence, DateTime? timestamp = null)
         {
+            var message = CreateEmptyByteMessage(sequence, timestamp);
+            message.Content = Convert.FromBase64String(Base64UrMessage);
+            return message;
+        }
+
+        public static IBytesMessage CreateEmptyByteMessage(string sequence = TestMessage.PushportSequence, DateTime? timestamp = null)
+        {
             var message = Substitute.For<IBytesMessage>();
             message.NMSTimestamp = timestamp ?? TestMessage.Timestamp;
             message.NMSMessageId = TestMessage.MessageId;
             var properties = CreateProperties(sequence);
             message.Properties.Returns(properties);
-            message.Content = Convert.FromBase64String(Base64UrMessage);
             return message;
         }
-
+        
         private static IPrimitiveMap CreateProperties(string sequence, string messageType = MessageTypes.ActualOrForcast)
         {
             var lookup = new Dictionary<string, string>()
@@ -44,15 +53,26 @@ namespace DarwinClient.Test.Helpers
             return properties;
         }
         
-        public static ITextMessage CreateTextMessage(string sequence = TestMessage.PushportSequence, DateTime? timestamp = null)
+        public static ITextMessage CreateTextMessage(string xml = XmlUrMessage, string sequence = TestMessage.PushportSequence, DateTime? timestamp = null)
         {
             var message = Substitute.For<ITextMessage>();
             message.NMSTimestamp = timestamp ?? TestMessage.Timestamp;
             message.NMSMessageId = TestMessage.MessageId;
             var properties = CreateProperties(sequence);
             message.Properties.Returns(properties);
-            message.Text = XmlUrMessage;
+            message.Text = xml;
             return message;
+        }
+        
+        public static DarwinMessage CreateDarwinMessage(string xml = XmlUrMessage, string sequenceNumber = TestMessage.PushportSequence)
+        {
+            return new DarwinMessage(CreateDarwinUpdates(xml, sequenceNumber), CreateEmptyByteMessage(sequenceNumber));
+        }
+        
+        public static Pport CreateDarwinUpdates(string xml = XmlUrMessage, string sequenceNumber = TestMessage.PushportSequence)
+        {
+            var deserializer = new MessageDeserializer(Substitute.For<ILogger>());
+            return deserializer.Deserialize(xml, sequenceNumber);
         }
     }
 }

@@ -41,6 +41,13 @@ namespace DarwinClient
             Url = url;
             Topic = topic;
         }
+
+        public MessageQueue CreateQueue()
+        {
+            var queue = new MessageQueue(_logger);
+            queue.SubscribeTo(this);
+            return queue;
+        }
         
         public IDisposable Subscribe(IObserver<Message> observer)
         {

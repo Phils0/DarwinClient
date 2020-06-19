@@ -40,6 +40,7 @@ namespace DarwinClient
         internal DarwinMessage(Pport data, IMessage message): base(message)
         {
             Updates = data;
+            Updates.Message = this;
         }
     }
     

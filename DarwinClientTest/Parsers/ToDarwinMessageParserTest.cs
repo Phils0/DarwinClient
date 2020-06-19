@@ -22,6 +22,19 @@ namespace DarwinClient.Test.Parsers
         }
         
         [Fact]
+        public void SequenceNumberSet()
+        {
+            var source = MessageGenerator.CreateByteMessage();
+            
+            var parser = new ToDarwinMessageParser(Substitute.For<ILogger>());
+            
+            Assert.True(parser.TryParse(source, out var parsed));
+
+            var darwinMsg = parsed as DarwinMessage;
+            Assert.Equal(darwinMsg.PushportSequence, darwinMsg.PushportSequence);
+        }
+        
+        [Fact]
         public void ParseTextMessage()
         {
             var source = MessageGenerator.CreateTextMessage();
