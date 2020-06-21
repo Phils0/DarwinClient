@@ -1,45 +1,51 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Apache.NMS;
 using DarwinClient.Parsers;
 using Serilog;
 
 namespace DarwinClient
 {
+    public interface IPushPort
+    {
+        IMessageConsumer CreateConsumer(string topic);
+        IDisposable Subscribe(string topic, IObserver<Message> observer, IMessageParser parser = null);
+    }
+    
     /// <summary>
     /// Darwin PushPort
     /// </summary>
     /// <remarks>
     /// Does not store messages.
     /// Usage:
-    /// 1. Create Pushport instance
-    /// 2. Add subscribers
+    /// 1. Create PushPort instance
+    /// 2. Create queue.  Alternatively add own subscribers.  
     /// 3. Connect, will automatically start relaying messages
     /// If subscribe after start only going to get messages after subscription
     /// </remarks>
-    public class PushPort : IObservable<Message>, IDisposable
+    public class PushPort : IPushPort, IDisposable
     {
         public const string V16PushPortTopic = "darwin.pushport-v16";
+        public const string StatusTopic = "darwin.status";
         
         public Uri Url { get; }
-        public string Topic { get; }
-
-        private readonly MessagePublisher _publisher;
+        public string[] Topics => _queues.Keys.ToArray();
+        
         private readonly ILogger _logger;
+        private readonly Dictionary<string, PushPortTopic> _queues = new Dictionary<string, PushPortTopic>();
 
         private IConnection _connection;
         private ISession _session;
-        private IMessageConsumer _consumer;
-        
-        public PushPort(string url, IMessageParser parser, ILogger logger, string topic = V16PushPortTopic) : this(new Uri(url), topic, parser, logger)
+
+        public PushPort(string url, ILogger logger) : this(new Uri(url), logger)
         {
         }
 
-        public PushPort(Uri url, string topic, IMessageParser parser, ILogger logger)
+        public PushPort(Uri url, ILogger logger)
         {
             _logger = logger;
-            _publisher = new MessagePublisher(parser, logger);
             Url = url;
-            Topic = topic;
         }
 
         public MessageQueue CreateQueue()
@@ -49,9 +55,14 @@ namespace DarwinClient
             return queue;
         }
         
-        public IDisposable Subscribe(IObserver<Message> observer)
+        public IDisposable Subscribe(string topic, IObserver<Message> observer, IMessageParser parser = null)
         {
-            return _publisher.Subscribe(observer);
+            if (!_queues.TryGetValue(topic, out var listener))
+            {
+                listener = new PushPortTopic(this, topic, parser, _logger);
+                _queues.Add(topic, listener);
+            }
+            return listener.Subscribe(observer);
         }
 
         public void Connect(string user, string password)
@@ -63,14 +74,17 @@ namespace DarwinClient
                 _connection.ClientId = user;
                 _connection.ExceptionListener += new ExceptionListener(OnConnectionException);
                 _session = _connection.CreateSession();
-                var topic = _session.GetTopic(Topic);
-                _consumer = _session.CreateConsumer(topic);
-                _consumer.Listener += new MessageListener(OnMessageReceived);
+                
+                foreach (var listener in _queues.Values)
+                {
+                    listener.Listen();
+                }
+                
                 _connection.Start();
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "Failed to connect to pushport {url}  Topic:{topic}", Url, Topic);
+                _logger.Error(exception, "Failed to connect to pushport {url}", this);
                 Disconnect(true);
                 throw new DarwinConnectionException("Failed to connect to pushport.", exception);
             }
@@ -89,19 +103,14 @@ namespace DarwinClient
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "Error stopping connection to pushport {url}  Topic:{topic}", Url, Topic);
+                _logger.Error(exception, "Error stopping connection to pushport {url}", this);
             }
 
-            try
+            foreach (var topic in _queues.Values)
             {
-                _consumer?.Close();
-                _consumer = null;
+                topic.Disconnect(isError);
             }
-            catch (Exception exception)
-            {
-                _logger.Error(exception, "Error closing consumer to pushport {url}  Topic:{topic}", Url, Topic);
-            }
-
+            
             try
             {
                 _session?.Close();
@@ -109,7 +118,7 @@ namespace DarwinClient
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "Error closing session to pushport {url}  Topic:{topic}", Url, Topic);
+                _logger.Error(exception, "Error closing session to pushport {url}", this);
             }
 
             try
@@ -119,22 +128,31 @@ namespace DarwinClient
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "Error closing connection to pushport {url}  Topic:{topic}", Url, Topic);
+                _logger.Error(exception, "Error closing connection to pushport {url}", this);
             }
-
-            _publisher.Unsubscribe(isError);
         }
         
         private void OnConnectionException(Exception exception)
         {
-            _logger.Error(exception, "Error on pushport connection {url} Topic:{topic}", Url, Topic);
-            _publisher.PublishError(exception);
+            _logger.Error(exception, "Error on pushport connection {url}", this);
+            var error = new DarwinConnectionException("Pushport connection errored", exception);
+            foreach (var topic in _queues.Values)
+            {
+                topic.OnError(error);
+            }
+            
             Disconnect(true);
         }
-
-        private void OnMessageReceived(IMessage message)
+        
+        public IMessageConsumer CreateConsumer(string topicName)
         {
-            _publisher.Publish(message);      
+            var topic = _session.GetTopic(topicName);
+            return _session.CreateConsumer(topic);
+        }
+
+        public override string ToString()
+        {
+            return Url.ToString();
         }
     }
 }

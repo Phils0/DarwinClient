@@ -31,7 +31,7 @@ namespace DarwinClient
         {
             foreach (var observer in _observers)
             {
-                observer.OnError(new DarwinConnectionException("Problem with pushport connection", exception));
+                observer.OnError(exception);
             }
         }
 

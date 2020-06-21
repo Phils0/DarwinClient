@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DarwinClient.Parsers;
 using DarwinClient.SchemaV16;
 using Serilog;
 
@@ -36,9 +37,10 @@ namespace DarwinClient
                 _logger.Warning("Unknown message: {msg}", msg);
         }
 
-        public void SubscribeTo(IObservable<Message> source)
+        public void SubscribeTo(IPushPort source)
         {
-            _unsubscriber = source.Subscribe(this);
+            var parser = new ToDarwinMessageParser(_logger);
+            _unsubscriber = source.Subscribe(PushPort.V16PushPortTopic, this, parser);
             IsLive = true;
         }
         

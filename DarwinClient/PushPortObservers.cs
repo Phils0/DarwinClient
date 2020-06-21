@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Apache.NMS;
 
 namespace DarwinClient
 {
@@ -42,7 +41,8 @@ namespace DarwinClient
         {
             if (!isError)
             {
-                foreach (var observer in this)
+                // Clone into an array so removing does not affect enumeration
+                foreach (var observer in this.ToArray())
                     observer.OnCompleted();                
             }
 
