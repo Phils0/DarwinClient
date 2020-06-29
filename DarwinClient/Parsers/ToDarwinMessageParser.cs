@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Apache.NMS;
 using DarwinClient.SchemaV16;
 using DarwinClient.Serialization;
@@ -8,6 +9,8 @@ namespace DarwinClient.Parsers
 {
     public class ToDarwinMessageParser : IMessageParser
     {
+        public Type MessageType { get; } = typeof(DarwinMessage);
+        
         private readonly ILogger _logger;
         private readonly MessageDeserializer _deserializer;
 

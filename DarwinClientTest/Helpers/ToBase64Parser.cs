@@ -11,6 +11,8 @@ namespace DarwinClient.Test.Helpers
     /// </summary>
     public class ToBase64Parser : IMessageParser
     {
+        public Type MessageType { get; } = typeof(TextMessage);
+
         private readonly ILogger _logger;
 
         public ToBase64Parser(ILogger logger)

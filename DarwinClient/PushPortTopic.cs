@@ -1,40 +1,37 @@
 ﻿using System;
 using Apache.NMS;
-using DarwinClient.Parsers;
 using Serilog;
 
 namespace DarwinClient
 {
-    internal class PushPortTopic : IObservable<Message>, IDisposable
+    internal class PushPortTopic : IDisposable
     { 
         internal string Topic { get; }
 
-        private readonly MessagePublisher _publisher;
+        private readonly IMessagePublisher _publisher;
         private readonly ILogger _logger;
         
         private IPushPort _pushport;
         private IMessageConsumer _consumer;
         
-        internal PushPortTopic(IPushPort pushport, string topic, IMessageParser parser, ILogger logger)
+        internal PushPortTopic(IPushPort pushport, string topic, IMessagePublisher publisher, ILogger logger)
         {
-            _logger = logger;
             _pushport = pushport ?? throw new ArgumentNullException(nameof(pushport));
-            if(parser == null)
-                throw new ArgumentNullException(nameof(parser));
-            _publisher = new MessagePublisher(parser, logger);
+            _publisher = publisher ?? throw new ArgumentNullException(nameof(publisher));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Topic = topic;
         }
         
-        public IDisposable Subscribe(IObserver<Message> observer)
+        public IDisposable Subscribe(IPushPortObserver observer)
         {
             return _publisher.Subscribe(observer);
         }
 
-        internal void Listen()
+        internal void Consume()
         {
             try
             {
-                _consumer = _pushport.CreateConsumer(Topic);
+                _consumer = _pushport.Consume(Topic);
                 _consumer.Listener += new MessageListener(OnMessageReceived);
             }
             catch (Exception exception)
@@ -73,6 +70,11 @@ namespace DarwinClient
         private void OnMessageReceived(IMessage message)
         {
             _publisher.Publish(message);      
+        }
+
+        public override string ToString()
+        {
+            return Topic;
         }
     }
 }

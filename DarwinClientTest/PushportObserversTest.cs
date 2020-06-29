@@ -1,4 +1,5 @@
 ﻿using System;
+using DarwinClient.Parsers;
 using NSubstitute;
 using Xunit;
 
@@ -9,9 +10,9 @@ namespace DarwinClient.Test
         [Fact]
         public void Subscribe()
         {
-            var observer = Substitute.For<IObserver<Message>>();
+            var observer = Substitute.For<IPushPortObserver>();
             
-            var observers = new PushPortObservers();
+            var observers = new PushPortObservers(Substitute.For<IMessageParser>());
             observers.Subscribe(observer);
             Assert.Contains(observer, observers);
         }
@@ -19,9 +20,9 @@ namespace DarwinClient.Test
         [Fact]
         public void Unsubscribe()
         {
-            var observer = Substitute.For<IObserver<Message>>();
+            var observer = Substitute.For<IPushPortObserver>();
             
-            var observers = new PushPortObservers();
+            var observers = new PushPortObservers(Substitute.For<IMessageParser>());
             var unsubscribe = observers.Subscribe(observer);
             Assert.Contains(observer, observers);
             
@@ -32,10 +33,10 @@ namespace DarwinClient.Test
         [Fact]
         public void UnsubscribeAll()
         {
-            var observer1 = Substitute.For<IObserver<Message>>();
-            var observer2 = Substitute.For<IObserver<Message>>();
+            var observer1 = Substitute.For<IPushPortObserver>();
+            var observer2 = Substitute.For<IPushPortObserver>();
            
-            var observers = new PushPortObservers();
+            var observers = new PushPortObservers(Substitute.For<IMessageParser>());
             observers.Subscribe(observer1);
             observers.Subscribe(observer2);
             Assert.NotEmpty(observers);
@@ -49,10 +50,10 @@ namespace DarwinClient.Test
         [Fact]
         public void UnsubscribeAllDoesNotRaiseOnCompletedIfIsError()
         {
-            var observer1 = Substitute.For<IObserver<Message>>();
-            var observer2 = Substitute.For<IObserver<Message>>();
+            var observer1 = Substitute.For<IPushPortObserver>();
+            var observer2 = Substitute.For<IPushPortObserver>();
            
-            var observers = new PushPortObservers();
+            var observers = new PushPortObservers(Substitute.For<IMessageParser>());
             observers.Subscribe(observer1);
             observers.Subscribe(observer2);
             Assert.NotEmpty(observers);

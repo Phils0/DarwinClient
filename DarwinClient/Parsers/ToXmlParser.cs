@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.IO.Compression;
 using Apache.NMS;
 using Serilog;
@@ -7,6 +8,8 @@ namespace DarwinClient.Parsers
 {
     public class ToXmlParser : IMessageParser
     {
+        public Type MessageType { get; } = typeof(TextMessage);
+
         private readonly ILogger _logger;
 
         public ToXmlParser(ILogger logger)

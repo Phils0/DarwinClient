@@ -1,10 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using DarwinClient.Parsers;
 
 namespace DarwinClient
 {
+    internal class PushPortObserverParserComparer : IEqualityComparer<PushPortObservers>
+    { 
+        public bool Equals(PushPortObservers x, PushPortObservers y)
+        {
+            return x?.Parser == y?.Parser;
+        }
+
+        public int GetHashCode(PushPortObservers observers)
+        {
+            return observers.Parser.GetHashCode();
+        }
+    }
+    
     internal class PushPortObservers : List<IObserver<Message>>, IDisposable
     {
+        public IMessageParser Parser { get; }
+
+        internal PushPortObservers(IMessageParser parser) : base()
+        {
+            Parser = parser;
+        }
+        
         internal IDisposable Subscribe(IObserver<Message> observer)
         {
             // Check whether observer is already registered. If not, add it
@@ -41,7 +62,7 @@ namespace DarwinClient
         {
             if (!isError)
             {
-                // Clone into an array so removing does not affect enumeration
+                // Clone into an array to remove concurrency problem involving altering enumeration
                 foreach (var observer in this.ToArray())
                     observer.OnCompleted();                
             }

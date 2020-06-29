@@ -1,58 +1,90 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Apache.NMS;
 using DarwinClient.Parsers;
 using Serilog;
 
 namespace DarwinClient
 {
-    internal class MessagePublisher: IObservable<Message>, IDisposable
+    public interface IMessagePublisher
     {
-        private readonly IMessageParser _parser;
-        private readonly ILogger _logger;
-        private PushPortObservers _observers = new PushPortObservers();
+        IDisposable Subscribe(IPushPortObserver observer);
+        void Unsubscribe(bool isError);
+        void PublishError(Exception exception);
+        void Publish(IMessage message);
+    }
 
-        internal MessagePublisher(IMessageParser parser, ILogger logger)
+    internal class MessagePublisher: IDisposable, IMessagePublisher
+    {
+        private readonly ISet<IMessageParser> _parsers;
+        private readonly ILogger _logger;
+        private ISet<PushPortObservers> _observers = new HashSet<PushPortObservers>(new PushPortObserverParserComparer());
+        
+        internal MessagePublisher(ISet<IMessageParser> parsers, ILogger logger)
         {
-            _parser = parser;
+            _parsers = parsers;
             _logger = logger;
         }
         
-        public IDisposable Subscribe(IObserver<Message> observer)
+        public IDisposable Subscribe(IPushPortObserver observer)
         {
-            return _observers.Subscribe(observer);
-        }
-        
-        internal void Unsubscribe(bool isError)
-        {
-            _observers.UnsubscribeAll(false);
-        }
-        
-        internal void PublishError(Exception exception)
-        {
-            foreach (var observer in _observers)
+            var messageType = observer.MessageType;
+            var observers = _observers.SingleOrDefault(o => o.Parser.MessageType.Equals(messageType));
+            if (observers == default)
             {
-                observer.OnError(exception);
+                var parser = _parsers.Single(p => p.MessageType.Equals(messageType));
+                observers = new PushPortObservers(parser);
+                _observers.Add(observers);
+            }
+            
+            return observers.Subscribe(observer);
+        }
+        
+        public void Unsubscribe(bool isError)
+        {
+            foreach (var observers in _observers)
+            {
+                observers.UnsubscribeAll(isError);
+            }
+        }
+        
+        public void PublishError(Exception exception)
+        {
+            foreach (var observers in _observers)
+            {
+                foreach (var observer in observers)
+                {
+                    observer.OnError(exception);
+                }
             }
         }
 
-        internal void Publish(IMessage message)
+        public void Publish(IMessage message)
         {
-            Message darwinMessage;
-            if (!_parser.TryParse(message, out darwinMessage))
+            foreach (var observers in _observers)
             {
-                _logger.Warning("UnknownMessage @{timestamp}:{id} {msg}", message.NMSTimestamp, message.NMSMessageId, message.NMSType);
-                darwinMessage = new UnknownMessage(message);
+                Message darwinMessage;
+                if (!observers.Parser.TryParse(message, out darwinMessage))
+                {
+                    _logger.Warning("UnknownMessage @{timestamp}:{id} {msg}", message.NMSTimestamp,
+                        message.NMSMessageId, message.NMSType);
+                    darwinMessage = new UnknownMessage(message);
+                }
+
+                foreach (var observer in observers)
+                {
+                    observer.OnNext(darwinMessage);
+                }
             }
-            
-            foreach (var observer in _observers)
-            {
-                observer.OnNext(darwinMessage);
-            }       
         }
 
         public void Dispose()
         {
-            _observers.Dispose();
+            foreach (var observers in _observers)
+            {
+                observers.Dispose();
+            }
         }
     }
 }

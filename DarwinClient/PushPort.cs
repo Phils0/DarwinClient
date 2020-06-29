@@ -9,8 +9,8 @@ namespace DarwinClient
 {
     public interface IPushPort
     {
-        IMessageConsumer CreateConsumer(string topic);
-        IDisposable Subscribe(string topic, IObserver<Message> observer, IMessageParser parser = null);
+        IDisposable Subscribe(string topic, IPushPortObserver observer);        
+        IMessageConsumer Consume(string topic);
     }
     
     /// <summary>
@@ -20,9 +20,11 @@ namespace DarwinClient
     /// Does not store messages.
     /// Usage:
     /// 1. Create PushPort instance
-    /// 2. Create queue.  Alternatively add own subscribers.  
+    /// 2. Set topics
+    /// 3. Create queue.    
     /// 3. Connect, will automatically start relaying messages
     /// If subscribe after start only going to get messages after subscription
+    /// Alternatively to 2. and 3. add explicit topic and then own subscribers.
     /// </remarks>
     public class PushPort : IPushPort, IDisposable
     {
@@ -54,13 +56,27 @@ namespace DarwinClient
             queue.SubscribeTo(this);
             return queue;
         }
+
+        public void SetTopics()
+        {
+            AddTopic(V16PushPortTopic, Parsers.Parsers.Defaults(_logger));
+        }
         
-        public IDisposable Subscribe(string topic, IObserver<Message> observer, IMessageParser parser = null)
+        public void AddTopic(string topic, ISet<IMessageParser> parsers)
         {
             if (!_queues.TryGetValue(topic, out var listener))
             {
-                listener = new PushPortTopic(this, topic, parser, _logger);
+                var publisher = new MessagePublisher(parsers, _logger);
+                listener = new PushPortTopic(this, topic, publisher, _logger);
                 _queues.Add(topic, listener);
+            }
+        }
+        
+        public IDisposable Subscribe(string topic, IPushPortObserver observer)
+        {
+            if (!_queues.TryGetValue(topic, out var listener))
+            {
+                throw new DarwinException("Topic not added");
             }
             return listener.Subscribe(observer);
         }
@@ -77,7 +93,7 @@ namespace DarwinClient
                 
                 foreach (var listener in _queues.Values)
                 {
-                    listener.Listen();
+                    listener.Consume();
                 }
                 
                 _connection.Start();
@@ -144,7 +160,7 @@ namespace DarwinClient
             Disconnect(true);
         }
         
-        public IMessageConsumer CreateConsumer(string topicName)
+        public IMessageConsumer Consume(string topicName)
         {
             var topic = _session.GetTopic(topicName);
             return _session.CreateConsumer(topic);

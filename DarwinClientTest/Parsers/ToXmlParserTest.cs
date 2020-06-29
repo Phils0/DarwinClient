@@ -10,6 +10,13 @@ namespace DarwinClient.Test.Parsers
     public class ToXmlParserTest
     {
         [Fact]
+        public void MessageType()
+        {
+            var parser = new ToXmlParser(Substitute.For<ILogger>());
+            Assert.Equal(typeof(TextMessage), parser.MessageType);            
+        }
+        
+        [Fact]
         public void ParseByteMessage()
         {
             var source = MessageGenerator.CreateByteMessage();

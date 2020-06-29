@@ -3,8 +3,10 @@ using Serilog;
 
 namespace DarwinClient.Test.Helpers
 {
-    internal class LoggingObserver : IObserver<Message>
+    internal class LoggingObserver : IPushPortObserver
     {
+        public Type MessageType { get; } = typeof(TextMessage);
+        
         private readonly ILogger _logger;
 
         public LoggingObserver(ILogger logger)
@@ -28,6 +30,11 @@ namespace DarwinClient.Test.Helpers
                 _logger.Warning("{message}", msg);
             else
                 _logger.Information("{message}", msg);
+        }
+
+        public void Dispose()
+        {
+            _logger.Information("Dispose");
         }
     }
 }

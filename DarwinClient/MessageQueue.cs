@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using DarwinClient.Parsers;
 using DarwinClient.SchemaV16;
 using Serilog;
 
 namespace DarwinClient
 {
-    public class MessageQueue : Queue<Pport>, IObserver<Message>, IDisposable
+    public interface IPushPortObserver : IObserver<Message>, IDisposable
+    {
+        Type MessageType { get; }
+    }
+    
+    public class MessageQueue : Queue<Pport>, IPushPortObserver
     {
         private readonly ILogger _logger;
+
+        public Type MessageType { get; } = typeof(DarwinMessage);
 
         public bool IsLive { get; set; }
 
@@ -37,10 +43,9 @@ namespace DarwinClient
                 _logger.Warning("Unknown message: {msg}", msg);
         }
 
-        public void SubscribeTo(IPushPort source)
+        public void SubscribeTo(IPushPort source, string topic = PushPort.V16PushPortTopic)
         {
-            var parser = new ToDarwinMessageParser(_logger);
-            _unsubscriber = source.Subscribe(PushPort.V16PushPortTopic, this, parser);
+            _unsubscriber = source.Subscribe(topic, this);
             IsLive = true;
         }
         

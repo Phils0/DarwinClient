@@ -8,6 +8,12 @@ namespace DarwinClient.Test
 {
     public class MessageQueueTest
     {
+        [Fact]
+        public void MessageType()
+        {
+            var queue = new MessageQueue(Substitute.For<ILogger>());
+            Assert.Equal(typeof(DarwinMessage), queue.MessageType);            
+        }
         
         [Fact]
         public void SubscribeTo()

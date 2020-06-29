@@ -9,6 +9,13 @@ namespace DarwinClient.Test.Parsers
     public class ToDarwinMessageParserTest
     {
         [Fact]
+        public void MessageType()
+        {
+            var parser = new ToDarwinMessageParser(Substitute.For<ILogger>());
+            Assert.Equal(typeof(DarwinMessage), parser.MessageType);            
+        }
+
+        [Fact]
         public void ParseByteMessage()
         {
             var source = MessageGenerator.CreateByteMessage();
