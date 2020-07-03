@@ -32,7 +32,7 @@ namespace DarwinClient
             try
             {
                 _consumer = _pushport.Consume(Topic);
-                _consumer.Listener += new MessageListener(OnMessageReceived);
+                _consumer.Listener += OnMessageReceived;
             }
             catch (Exception exception)
             {
