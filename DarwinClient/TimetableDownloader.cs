@@ -37,6 +37,9 @@ namespace DarwinClient
         public const string Prefix = "PPTimetable/";          
     }
     
+    /// <summary>
+    /// Darwin Tiemtable and Reference Data Downloader
+    /// </summary>
     public interface ITimetableDownloader
     {
         Task<PportTimetableRef> GetReference(DateTime date, CancellationToken token);

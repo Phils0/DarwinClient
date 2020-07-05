@@ -11,32 +11,31 @@ namespace DarwinClient
         private readonly IMessagePublisher _publisher;
         private readonly ILogger _logger;
         
-        private IPushPort _pushport;
         private IMessageConsumer _consumer;
         
-        internal PushPortTopic(IPushPort pushport, string topic, IMessagePublisher publisher, ILogger logger)
+        internal PushPortTopic(string topic, IMessagePublisher publisher, ILogger logger)
         {
-            _pushport = pushport ?? throw new ArgumentNullException(nameof(pushport));
             _publisher = publisher ?? throw new ArgumentNullException(nameof(publisher));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Topic = topic;
         }
         
-        public IDisposable Subscribe(IPushPortObserver observer)
+        internal IDisposable Subscribe(IPushPortObserver observer)
         {
             return _publisher.Subscribe(observer);
         }
 
-        internal void Consume()
+        internal void StartConsuming(ISession session)
         {
             try
             {
-                _consumer = _pushport.Consume(Topic);
+                var topic = session.GetTopic(Topic);
+                _consumer = session.CreateConsumer(topic);
                 _consumer.Listener += OnMessageReceived;
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "Failed to start listening to pushport {url}  Topic:{topic}", _pushport, Topic);
+                _logger.Error(exception, "Failed to start listening to pushport topic: {topic}",  Topic);
                 Disconnect(true);
                 throw new DarwinConnectionException("Failed to connect to pushport.", exception);
             }
@@ -56,7 +55,7 @@ namespace DarwinClient
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "Error closing consumer to pushport {url}  Topic:{topic}", _pushport, Topic);
+                _logger.Error(exception, "Error closing consumer to pushport topic:{topic}", Topic);
             }
             
             _publisher.Unsubscribe(isError);

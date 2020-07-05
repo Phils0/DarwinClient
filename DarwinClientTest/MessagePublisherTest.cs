@@ -51,7 +51,7 @@ namespace DarwinClient.Test
         [Fact]
         public void PublishToMultipleSubscribersWithDifferentMessageTypes()
         {
-            var parser =  DarwinClient.Parsers.Parsers.Defaults(Substitute.For<ILogger>());
+            var parser =  Publisher.DefaultParsers(Substitute.For<ILogger>());
             var target1 = new MessageQueue(Substitute.For<ILogger>());
             var target2 = CreateMockObserver(typeof(TextMessage));
             var publisher = new MessagePublisher(parser, Substitute.For<ILogger>());

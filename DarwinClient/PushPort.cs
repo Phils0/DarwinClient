@@ -2,52 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using Apache.NMS;
-using DarwinClient.Parsers;
 using Serilog;
 
 namespace DarwinClient
 {
     public interface IPushPort
     {
-        IDisposable Subscribe(string topic, IPushPortObserver observer);        
-        IMessageConsumer Consume(string topic);
+        /// <summary>
+        /// Pushport URL
+        /// </summary>
+        Uri Url { get; }
+        /// <summary>
+        /// Topics connecting/connected to
+        /// </summary>
+        string[] Topics { get; }
+        /// <summary>
+        /// Create a queue to contain messages from the pushport
+        /// </summary>
+        /// <returns>Message Queue</returns>
+        MessageQueue CreateQueue();
+        /// <summary>
+        /// Add an ActiveMQ topic to connect to
+        /// </summary>
+        /// <param name="topic">Topic name</param>
+        /// <param name="publisher">Publisher to distribute topic messages to</param>
+        void AddTopic(string topic, IMessagePublisher publisher);
+        /// <summary>
+        /// Subscribe to a topic
+        /// </summary>
+        /// <param name="topic">Topic to subscribe to</param>
+        /// <param name="observer">Observer</param>
+        /// <returns>A disposable instance to allow the observer to stop subscribing</returns>
+        IDisposable Subscribe(string topic, IPushPortObserver observer);
+        void Connect(string user, string password);
     }
-    
+
+
     /// <summary>
     /// Darwin PushPort
     /// </summary>
     /// <remarks>
     /// Does not store messages.
     /// Usage:
-    /// 1. Create PushPort instance
-    /// 2. Set topics
+    /// 1. Create PushPort instance, by default will configure using darwin.pushport-v16 topic
+    /// 2. Add topic(s) (if not using default configuration)
     /// 3. Create queue.    
-    /// 3. Connect, will automatically start relaying messages
-    /// If subscribe after start only going to get messages after subscription
-    /// Alternatively to 2. and 3. add explicit topic and then own subscribers.
+    /// 4. Connect.  Will start relaying messages into the queue.
+    /// If subscribe after connect only going to get messages after subscription
+    /// Alternatively 3. can add own subscribers.
     /// </remarks>
     public class PushPort : IPushPort, IDisposable
     {
         public const string V16PushPortTopic = "darwin.pushport-v16";
         public const string StatusTopic = "darwin.status";
+
+        public Uri Url => _factory.BrokerUri;
+        public string[] Topics => _topics.Keys.ToArray();
         
-        public Uri Url { get; }
-        public string[] Topics => _queues.Keys.ToArray();
-        
+        private readonly IConnectionFactory _factory;
         private readonly ILogger _logger;
-        private readonly Dictionary<string, PushPortTopic> _queues = new Dictionary<string, PushPortTopic>();
+        private readonly Dictionary<string, PushPortTopic> _topics = new Dictionary<string, PushPortTopic>();
 
         private IConnection _connection;
         private ISession _session;
 
-        public PushPort(string url, ILogger logger) : this(new Uri(url), logger)
+        public PushPort(string url, ILogger logger, bool useDefaultTopics = true) : 
+            this(new NMSConnectionFactory(new Uri(url)), logger, useDefaultTopics)
         {
         }
 
-        public PushPort(Uri url, ILogger logger)
+        public PushPort(IConnectionFactory factory, ILogger logger, bool useDefaultTopics)
         {
             _logger = logger;
-            Url = url;
+            _factory = factory;
+            if (useDefaultTopics)
+            {
+                AddTopic(V16PushPortTopic, Publisher.CreateDefault(_logger));
+            }
         }
 
         public MessageQueue CreateQueue()
@@ -56,44 +87,37 @@ namespace DarwinClient
             queue.SubscribeTo(this);
             return queue;
         }
-
-        public void SetTopics()
-        {
-            AddTopic(V16PushPortTopic, Parsers.Parsers.Defaults(_logger));
-        }
         
-        public void AddTopic(string topic, ISet<IMessageParser> parsers)
+        public void AddTopic(string topic, IMessagePublisher publisher)
         {
-            if (!_queues.TryGetValue(topic, out var listener))
+            if (!_topics.TryGetValue(topic, out var listener))
             {
-                var publisher = new MessagePublisher(parsers, _logger);
-                listener = new PushPortTopic(this, topic, publisher, _logger);
-                _queues.Add(topic, listener);
+                listener = new PushPortTopic(topic, publisher, _logger);
+                _topics.Add(topic, listener);
             }
         }
         
         public IDisposable Subscribe(string topic, IPushPortObserver observer)
         {
-            if (!_queues.TryGetValue(topic, out var listener))
+            if (!_topics.TryGetValue(topic, out var pushPortTopic))
             {
                 throw new DarwinException("Topic not added");
             }
-            return listener.Subscribe(observer);
-        }
+            return pushPortTopic.Subscribe(observer);
+        } 
 
         public void Connect(string user, string password)
         {
             try
             {
-                var factory = new NMSConnectionFactory(Url);
-                _connection = factory.CreateConnection(user, password);
+                _connection = _factory.CreateConnection(user, password);
                 _connection.ClientId = user;
                 _connection.ExceptionListener += new ExceptionListener(OnConnectionException);
                 _session = _connection.CreateSession();
                 
-                foreach (var listener in _queues.Values)
+                foreach (var listener in _topics.Values)
                 {
-                    listener.Consume();
+                    listener.StartConsuming(_session);
                 }
                 
                 _connection.Start();
@@ -122,7 +146,7 @@ namespace DarwinClient
                 _logger.Error(exception, "Error stopping connection to pushport {url}", this);
             }
 
-            foreach (var topic in _queues.Values)
+            foreach (var topic in _topics.Values)
             {
                 topic.Disconnect(isError);
             }
@@ -152,7 +176,7 @@ namespace DarwinClient
         {
             _logger.Error(exception, "Error on pushport connection {url}", this);
             var error = new DarwinConnectionException("Pushport connection errored", exception);
-            foreach (var topic in _queues.Values)
+            foreach (var topic in _topics.Values)
             {
                 topic.OnError(error);
             }
@@ -160,12 +184,6 @@ namespace DarwinClient
             Disconnect(true);
         }
         
-        public IMessageConsumer Consume(string topicName)
-        {
-            var topic = _session.GetTopic(topicName);
-            return _session.CreateConsumer(topic);
-        }
-
         public override string ToString()
         {
             return Url.ToString();

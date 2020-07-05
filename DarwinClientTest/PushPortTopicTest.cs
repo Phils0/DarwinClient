@@ -12,37 +12,41 @@ namespace DarwinClient.Test
         [Fact]
         public void ConsumePushport()
         {
-            var consumer = CreateMockPushportConsumer(out var pushport);
+            var consumer = CreateMockPushportConsumer();
             var publisher = Substitute.For<IMessagePublisher>();
-            var topic = CreateAndConsumeTopic(pushport, publisher);
+            var topic = CreateAndConsumeTopic(consumer, publisher);
 
             var message = MessageGenerator.CreateByteMessage();
             consumer.Listener += Raise.Event<MessageListener>(message);
             
             publisher.Received().Publish(message);
         }
-        private static IMessageConsumer CreateMockPushportConsumer(out IPushPort pushport)
+        
+        private static IMessageConsumer CreateMockPushportConsumer()
         {
             var consumer = Substitute.For<IMessageConsumer>();
-            pushport = Substitute.For<IPushPort>();
-            pushport.Consume("Test").Returns(consumer);
             return consumer;
         }
 
-        private static PushPortTopic CreateAndConsumeTopic(IPushPort pushport, IMessagePublisher publisher)
+        private static PushPortTopic CreateAndConsumeTopic(IMessageConsumer consumer, IMessagePublisher publisher)
         {
             var logger = Substitute.For<ILogger>();
-            var topic = new PushPortTopic(pushport, "Test", publisher, logger);
-            topic.Consume();
+            var session = Substitute.For<ISession>();
+            var mqTopic = Substitute.For<ITopic>();
+            session.GetTopic("Test").Returns(mqTopic);
+            session.CreateConsumer(mqTopic).Returns(consumer);
+            
+            var topic = new PushPortTopic("Test", publisher, logger);
+            topic.StartConsuming(session);
             return topic;
         }
         
         [Fact]
         public void DisconnectFromConsumer()
         {
-            var consumer = CreateMockPushportConsumer(out var pushport);
+            var consumer = CreateMockPushportConsumer();
             var publisher = Substitute.For<IMessagePublisher>();
-            var topic = CreateAndConsumeTopic(pushport, publisher);
+            var topic = CreateAndConsumeTopic(consumer, publisher);
             
             topic.Disconnect(false);
 
@@ -52,9 +56,9 @@ namespace DarwinClient.Test
         [Fact]
         public void DisconnectUnsubscribesFromPublisher()
         {
-            var consumer = CreateMockPushportConsumer(out var pushport);
+            var consumer = CreateMockPushportConsumer();
             var publisher = Substitute.For<IMessagePublisher>();
-            var topic = CreateAndConsumeTopic(pushport, publisher);
+            var topic = CreateAndConsumeTopic(consumer, publisher);
             
             topic.Disconnect(false);
 
@@ -67,9 +71,9 @@ namespace DarwinClient.Test
         [Fact]
         public void MessagesNotForwardedAfterDisconnect()
         {
-            var consumer = CreateMockPushportConsumer(out var pushport);
+            var consumer = CreateMockPushportConsumer();
             var publisher = Substitute.For<IMessagePublisher>();
-            var topic = CreateAndConsumeTopic(pushport, publisher);
+            var topic = CreateAndConsumeTopic(consumer, publisher);
             
             topic.Disconnect(false);
 
@@ -79,9 +83,9 @@ namespace DarwinClient.Test
         [Fact]
         public void OnErrorDisconnectsEverything()
         {
-            var consumer = CreateMockPushportConsumer(out var pushport);
+            var consumer = CreateMockPushportConsumer();
             var publisher = Substitute.For<IMessagePublisher>();
-            var topic = CreateAndConsumeTopic(pushport, publisher);
+            var topic = CreateAndConsumeTopic(consumer, publisher);
             
             topic.OnError(new Exception("Test"));
             

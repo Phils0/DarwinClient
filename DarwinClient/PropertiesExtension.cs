@@ -2,9 +2,9 @@
 
 namespace DarwinClient
 {
-    public static class PropertiesExtension
+    internal static class PropertiesExtension
     {
-        public static string TryGetProperty(this IPrimitiveMap properties, string name, string defaultValue = "")
+        internal static string TryGetProperty(this IPrimitiveMap properties, string name, string defaultValue = "")
         {
             return properties.Contains(name) ? properties.GetString(name) : defaultValue;
         }

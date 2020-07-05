@@ -17,9 +17,14 @@ namespace DarwinClient
         }
     }
     
+    /// <summary>
+    /// List of <see cref="System.IObserver{Message}"/> subscribed to pushport
+    /// Also has the Parser <see cref="IMessageParser"/> instance to convert the
+    /// Active MQ Message to the correct internal <see cref="Message"/> type
+    /// </summary>
     internal class PushPortObservers : List<IObserver<Message>>, IDisposable
     {
-        public IMessageParser Parser { get; }
+        internal IMessageParser Parser { get; }
 
         internal PushPortObservers(IMessageParser parser) : base()
         {

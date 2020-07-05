@@ -7,14 +7,45 @@ using Serilog;
 
 namespace DarwinClient
 {
+    /// <summary>
+    /// Publishes Pushport Messages
+    /// Acts as an intermediary between the topic and the observer(s)
+    /// is equivalent to <see cref="System.IObservable{Message}"/>
+    /// Responsible for converting the ActiveMQ message to a <see cref="Message"/> type
+    /// </summary>
     public interface IMessagePublisher
     {
+        /// <summary>
+        /// Subscribe to publisher
+        /// </summary>
+        /// <param name="observer">observer</param>
+        /// <returns>A disposable instance to allow the observer to stop subscribing</returns>
         IDisposable Subscribe(IPushPortObserver observer);
+        /// <summary>
+        /// Unsubscribe all observers
+        /// </summary>
+        /// <param name="isError">If unsubscribing due to error</param>
         void Unsubscribe(bool isError);
+        /// <summary>
+        /// Publish error to observers
+        /// </summary>
+        /// <param name="exception"></param>
         void PublishError(Exception exception);
+        /// <summary>
+        /// Publish topic message to observers
+        /// </summary>
+        /// <param name="message"></param>
         void Publish(IMessage message);
     }
-
+    
+    /// <summary>
+    /// With <seealso cref="PushPortObservers"/> handles broadcasting the pushport
+    /// messages to observer(s).
+    /// </summary>
+    /// <remarks>
+    /// Responsible for converting the Active MQ Message to the correct internal <see cref="Message"/> type
+    /// Supports publishing into multiple different internal <see cref="Message"/> formats
+    /// </remarks>
     internal class MessagePublisher: IDisposable, IMessagePublisher
     {
         private readonly ISet<IMessageParser> _parsers;
@@ -86,5 +117,22 @@ namespace DarwinClient
                 observers.Dispose();
             }
         }
+    }
+    
+    public static class Publisher
+    {
+        public static IMessagePublisher CreateDefault(ILogger logger)
+        {
+            return new MessagePublisher(DefaultParsers(logger), logger);
+        }   
+        
+        internal static HashSet<IMessageParser> DefaultParsers(ILogger logger)
+        {
+            return new HashSet<IMessageParser>(
+                new IMessageParser[]
+                {
+                    new ToDarwinMessageParser(logger), new ToXmlParser(logger)
+                });
+        }  
     }
 }
