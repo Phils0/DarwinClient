@@ -12,7 +12,7 @@ namespace DarwinClient.Test.Helpers
     {
         public const string PushportSequence = "123456";
         public const string MessageId = "ID:nrdp-prod-01.dsg.caci.co.uk-34724-1585330094093-8:605:1:1:312607";
-        public static readonly DateTime Timestamp = DateTime.Parse("13/06/2020 09:36:57");        
+        public static readonly DateTime Timestamp = new DateTime(2020, 6, 13, 9, 36, 57);        
     }
     
     public static class MessageGenerator
