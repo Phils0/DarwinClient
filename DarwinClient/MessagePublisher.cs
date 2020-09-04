@@ -61,10 +61,10 @@ namespace DarwinClient
         public IDisposable Subscribe(IPushPortObserver observer)
         {
             var messageType = observer.MessageType;
-            var observers = _observers.SingleOrDefault(o => o.Parser.MessageType.Equals(messageType));
+            var observers = _observers.SingleOrDefault(o => o.Parser.MessageType == messageType);
             if (observers == default)
             {
-                var parser = _parsers.Single(p => p.MessageType.Equals(messageType));
+                var parser = _parsers.Single(p => p.MessageType == messageType);
                 observers = new PushPortObservers(parser);
                 _observers.Add(observers);
             }

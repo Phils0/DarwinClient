@@ -21,7 +21,7 @@ namespace DarwinClient.Test
             var queue = new MessageQueue(Substitute.For<ILogger>());
             
             Assert.False(queue.IsLive);
-            queue.SubscribeTo(Substitute.For<IPushPort>());
+            queue.SubscribeTo(Substitute.For<ISubscriptionPushPort>());
             Assert.True(queue.IsLive);
         }
         
@@ -40,7 +40,7 @@ namespace DarwinClient.Test
         public void ObserveCompleteReceived()
         {
             var queue = new MessageQueue(Substitute.For<ILogger>());
-            queue.SubscribeTo(Substitute.For<IPushPort>());
+            queue.SubscribeTo(Substitute.For<ISubscriptionPushPort>());
             
             Assert.True(queue.IsLive);
             queue.OnCompleted();
@@ -51,7 +51,7 @@ namespace DarwinClient.Test
         public void ObserveErrorReceived()
         {
             var queue = new MessageQueue(Substitute.For<ILogger>());
-            queue.SubscribeTo(Substitute.For<IPushPort>());
+            queue.SubscribeTo(Substitute.For<ISubscriptionPushPort>());
             
             Assert.True(queue.IsLive);
             queue.OnError(new Exception("Errored"));

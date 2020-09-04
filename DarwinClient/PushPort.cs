@@ -6,7 +6,47 @@ using Serilog;
 
 namespace DarwinClient
 {
-    public interface IPushPort
+    /// <summary>
+    /// Simple Pushport Interface that puts messages onto an in-memory queue
+    /// </summary>
+    /// <remarks>
+    /// Does not store messages.
+    /// Usage:
+    /// 1. Create PushPort instance, by default will configure using darwin.pushport-v16 topic
+    /// 2. <see cref="CreateQueue"/>.    
+    /// 4. <see cref="Connect"/> to the pushport.  Starts relaying messages to any created queues
+    /// If create queue after connect only going to get messages after subscription
+    /// Stops sending messages to the queues and closes the connection to the pushport when disposed
+    /// </remarks>
+    public interface IPushPort : IDisposable
+    {
+        /// <summary>
+        /// Create a  queue to hold Darwin events and register it with the pushport 
+        /// </summary>
+        /// <returns>Message Queue</returns>
+        MessageQueue CreateQueue();
+        /// <summary>
+        /// Connect to the pushport.  Once connected immediately starts pushing events to any created queues
+        /// </summary>
+        /// <param name="user">Darwin user</param>
+        /// <param name="password">Password</param>
+        /// <remarks>Stops sending when the instance is disposed</remarks>
+        void Connect(string user, string password);
+    }
+
+    /// <summary>
+    /// Pushport Interface.
+    /// </summary>
+    /// <remarks>Lower level interface giving the client control of what
+    /// Usage:
+    /// 1. Create PushPort instance, by default will configure using darwin.pushport-v16 topic
+    /// 2. <see cref="AddTopic"/> (if not using default configuration)
+    /// 3. <see cref="Subscribe"/>  your own listeners to the pushport  
+    /// 4. <see cref="Connect"/> to the pushport.  Starts relaying messages to any subscribers
+    /// If subscribe after connect only going to get messages after subscription
+    /// Alternatively 3. can add own subscribers.
+    /// </remarks>
+    public interface ISubscriptionPushPort : IDisposable
     {
         /// <summary>
         /// Pushport URL
@@ -16,11 +56,6 @@ namespace DarwinClient
         /// Topics connecting/connected to
         /// </summary>
         string[] Topics { get; }
-        /// <summary>
-        /// Create a queue to contain messages from the pushport
-        /// </summary>
-        /// <returns>Message Queue</returns>
-        MessageQueue CreateQueue();
         /// <summary>
         /// Add an ActiveMQ topic to connect to
         /// </summary>
@@ -34,24 +69,22 @@ namespace DarwinClient
         /// <param name="observer">Observer</param>
         /// <returns>A disposable instance to allow the observer to stop subscribing</returns>
         IDisposable Subscribe(string topic, IPushPortObserver observer);
+        /// <summary>
+        /// Connect to the pushport.  Start sending events to the subscribers
+        /// </summary>
+        /// <param name="user">Darwin user</param>
+        /// <param name="password">Password</param>
+        /// <remarks>Stops sending when the instance is disposed</remarks>
         void Connect(string user, string password);
     }
-
-
+    
     /// <summary>
-    /// Darwin PushPort
+    /// Darwin PushPort Facade
     /// </summary>
     /// <remarks>
     /// Does not store messages.
-    /// Usage:
-    /// 1. Create PushPort instance, by default will configure using darwin.pushport-v16 topic
-    /// 2. Add topic(s) (if not using default configuration)
-    /// 3. Create queue.    
-    /// 4. Connect.  Will start relaying messages into the queue.
-    /// If subscribe after connect only going to get messages after subscription
-    /// Alternatively 3. can add own subscribers.
     /// </remarks>
-    public class PushPort : IPushPort, IDisposable
+    public class PushPort : ISubscriptionPushPort, IPushPort, IDisposable
     {
         public const string V16PushPortTopic = "darwin.pushport-v16";
         public const string StatusTopic = "darwin.status";
@@ -79,13 +112,6 @@ namespace DarwinClient
             {
                 AddTopic(V16PushPortTopic, Publisher.CreateDefault(_logger));
             }
-        }
-
-        public MessageQueue CreateQueue()
-        {
-            var queue = new MessageQueue(_logger);
-            queue.SubscribeTo(this);
-            return queue;
         }
         
         public void AddTopic(string topic, IMessagePublisher publisher)
@@ -130,6 +156,13 @@ namespace DarwinClient
             }
         }
 
+        public MessageQueue CreateQueue()
+        {
+            var queue = new MessageQueue(_logger);
+            queue.SubscribeTo(this);
+            return queue;
+        }
+        
         public void Dispose()
         {
             Disconnect(false);

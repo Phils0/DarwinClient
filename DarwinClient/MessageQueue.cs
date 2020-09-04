@@ -43,7 +43,7 @@ namespace DarwinClient
                 _logger.Warning("Unknown message: {msg}", msg);
         }
 
-        public void SubscribeTo(IPushPort source, string topic = PushPort.V16PushPortTopic)
+        internal void SubscribeTo(ISubscriptionPushPort source, string topic = PushPort.V16PushPortTopic)
         {
             _unsubscriber = source.Subscribe(topic, this);
             IsLive = true;

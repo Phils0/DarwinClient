@@ -31,7 +31,7 @@ namespace DarwinClient
             Parser = parser;
         }
         
-        internal IDisposable Subscribe(IObserver<Message> observer)
+        internal IDisposable  Subscribe(IObserver<Message> observer)
         {
             // Check whether observer is already registered. If not, add it
             if (!Contains(observer)) {
