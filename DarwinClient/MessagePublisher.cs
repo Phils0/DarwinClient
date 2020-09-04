@@ -123,10 +123,10 @@ namespace DarwinClient
     {
         public static IMessagePublisher CreateDefault(ILogger logger)
         {
-            return new MessagePublisher(DefaultParsers(logger), logger);
+            return new MessagePublisher(GetParsers(logger), logger);
         }   
         
-        internal static HashSet<IMessageParser> DefaultParsers(ILogger logger)
+        internal static HashSet<IMessageParser> GetParsers(ILogger logger)
         {
             return new HashSet<IMessageParser>(
                 new IMessageParser[]
