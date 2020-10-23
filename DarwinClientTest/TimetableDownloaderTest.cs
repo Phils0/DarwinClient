@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Amazon.S3;
 using DarwinClient.Test.Helpers;
 using NSubstitute;
 using Serilog;
@@ -8,34 +9,39 @@ using Xunit.Abstractions;
 
 namespace DarwinClient.Test
 {
-    public class S3TimetableDownloaderTest
+    public class TimetableDownloaderTest
     {
-        private readonly ITestOutputHelper _testOutputHelper;
         private readonly ILogger _logger;
 
-        public S3TimetableDownloaderTest(ITestOutputHelper testOutputHelper)
+        public TimetableDownloaderTest(ITestOutputHelper testOutputHelper)
         {
-            _testOutputHelper = testOutputHelper;
             _logger = LoggingHelper.CreateLogger(testOutputHelper);
         }
 
         [Fact(Skip = "Actual S3 calls, needs profile set")]
         public async void RealDownloadSpecificReferenceData()
         {
-            var client = Helpers.Amazon.GetS3Client();
-            var downloader = new S3TimetableDownloader(client, _logger);
-
-            var refData =  await downloader.GetReference(DateTime.Today, CancellationToken.None);
+             var downloader = CreateDownloader(Helpers.Amazon.GetS3Client());
+             var refData =  await downloader.GetReference(DateTime.Today, CancellationToken.None);
             
             Assert.NotNull(refData);
         }
+
+        private TimetableDownloader CreateDownloader(IAmazonS3 client)
+        {
+            var source = new S3Source(client, _logger);
+            return CreateDownloader(source);
+        }
         
+        private TimetableDownloader CreateDownloader(IDarwinDownloadSource source)
+        {
+            return new TimetableDownloader(source, _logger);
+        }
+
         [Fact]
         public async void DownloadSpecificReferenceData()
         {
-            var client = DummyS3.CreateMock();
-            var downloader = new S3TimetableDownloader(client, _logger);
-
+            var downloader = CreateDownloader(DummyS3.CreateMock());
             var refData = await downloader.GetReference(DummyS3.TestDate, CancellationToken.None);
             
             Assert.NotNull(refData);
@@ -45,9 +51,7 @@ namespace DarwinClient.Test
         [Fact]
         public async void DownloadLatestReferenceData()
         {
-            var client = DummyS3.CreateSuccessfulRefDataMock();
-            var downloader = new S3TimetableDownloader(client, _logger);
-
+            var downloader = CreateDownloader(DummyS3.CreateSuccessfulRefDataMock());
             var refData = await downloader.GetLatestReference(CancellationToken.None);
             
             Assert.NotNull(refData);
@@ -57,9 +61,7 @@ namespace DarwinClient.Test
         [Fact(Skip = "Actual S3 calls, needs profile set")]
         public async void RealDownloadSpecificTimetable()
         {
-            var client = Helpers.Amazon.GetS3Client();
-            var downloader = new S3TimetableDownloader(client, _logger);
-
+            var downloader = CreateDownloader(Helpers.Amazon.GetS3Client());
             var timetable =  await downloader.GetTimetable(DateTime.Today, CancellationToken.None);
             
             Assert.NotNull(timetable);
@@ -68,9 +70,7 @@ namespace DarwinClient.Test
         [Fact]
         public async void DownloadSpecificTimetable()
         {
-            var client = DummyS3.CreateMock();
-            var downloader = new S3TimetableDownloader(client, _logger);
-
+            var downloader = CreateDownloader(DummyS3.CreateMock());
             var timetable = await downloader.GetTimetable(DummyS3.TestDate, CancellationToken.None);
             
             Assert.NotNull(timetable);
@@ -80,9 +80,7 @@ namespace DarwinClient.Test
         [Fact]
         public async void DownloadLatestTimetable()
         {
-            var client = DummyS3.CreateSuccessfulTimetableMock();
-            var downloader = new S3TimetableDownloader(client, _logger);
-
+            var downloader = CreateDownloader(DummyS3.CreateSuccessfulTimetableMock());
             var timetable = await downloader.GetLatestTimetable(CancellationToken.None);
             
             Assert.NotNull(timetable);

@@ -12,6 +12,8 @@ namespace DarwinClient.Test.Helpers
 {
     public static class DummyS3
     {
+        public static DirectoryInfo Directory => new DirectoryInfo(Path.Combine(".", "Data"));
+        
         public static DateTime TestDate = new DateTime(2020, 4, 29);
         public static string ReferenceData = Path.Combine(".", "Data", "20200429020643_ref_v3.xml.gz");
         public static string ReferenceDataV2 = Path.Combine(".", "Data", "20200415020643_ref_v2.xml.gz");
@@ -58,9 +60,25 @@ namespace DarwinClient.Test.Helpers
 
         public static GetObjectResponse DummyRefDataResponse(string bucket, string key)
         {
-            var name = GetName(key);
-            var file = Path.Combine(".", "Data", name);
-            return GetObjectResponse(bucket, key, file);
+            try
+            {
+                var name = GetName(key);
+                var file = Path.Combine(".", "Data", name);
+                return GetObjectResponse(bucket, key, file);
+            }
+            catch (Exception e)
+            {
+                return CreateDummyObject();
+            }
+
+            GetObjectResponse CreateDummyObject()
+            {
+                var dummy = new GetObjectResponse();
+                dummy.BucketName = bucket;
+                dummy.Key = key;
+                dummy.ResponseStream = new MemoryStream();
+                return dummy;
+            }
         }
 
         private static GetObjectResponse GetObjectResponse(string bucket, string key, string file)

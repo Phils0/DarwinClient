@@ -28,7 +28,8 @@ namespace DarwinFilesDownloader
                 var outputFolder = CreateOutputFolder();
                 Log.Information($"Created directory {outputFolder}", outputFolder);
                 
-                var downloader = new S3TimetableDownloader(s3, Log.Logger);
+                var source = new S3Source(s3, Log.Logger);
+                var downloader = new TimetableDownloader(source, Log.Logger);
 
                 var token = CancellationToken.None;
                 var refData =  await downloader.GetReference(DateTime.Today, CancellationToken.None);
