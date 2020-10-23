@@ -34,17 +34,22 @@ namespace DarwinFilesDownloader
                 var token = CancellationToken.None;
                 var refData =  await downloader.GetReference(DateTime.Today, CancellationToken.None);
                 var refString = JsonSerializer.Serialize(refData);
-                var refFile = Path.Combine(outputFolder, refData.File);
+                var refFile = Path.Combine(outputFolder, ToJsonExtension(refData.File));
                 await File.WriteAllTextAsync(refFile, refString, token);
                 Log.Information("Downloaded Refdata {file}", refData.File);
                 
                 var timetable =  await downloader.GetTimetable(DateTime.Today, token);
                 var timetableString = JsonSerializer.Serialize(timetable);
-                var timetableFile = Path.Combine(outputFolder, timetable.File);
+                var timetableFile = Path.Combine(outputFolder, ToJsonExtension(timetable.File));
                 await File.WriteAllTextAsync(timetableFile, timetableString, token);
                 Log.Information("Downloaded Timetable {file}", timetable.File);            
                 
                 Log.Information("Done");
+            }
+
+            string ToJsonExtension(string file)
+            {
+                return file.Replace(".xml.gz", ".json");
             }
         }
         
