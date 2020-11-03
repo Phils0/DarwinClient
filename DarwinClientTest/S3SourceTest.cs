@@ -21,7 +21,7 @@ namespace DarwinClient.Test
         public async void RealS3GetLatest()
         {
             var source = new S3Source(Helpers.Amazon.GetS3Client(), _logger);
-            var (stream, name) =  await source.GetLatest($"\\d+_ref_v.", CancellationToken.None);
+            var (stream, name) =  await source.Read($"\\d+_ref_v.", CancellationToken.None);
 
             Assert.NotEmpty(name);
             using var reader = new StreamReader(stream);
@@ -39,7 +39,7 @@ namespace DarwinClient.Test
         public async void GetLatest(string searchPattern, string expectedFile)
         {
             var source = new S3Source(DummyS3.CreateMock(), _logger);
-            var (stream, name) =  await source.GetLatest(searchPattern, CancellationToken.None);
+            var (stream, name) =  await source.Read(searchPattern, CancellationToken.None);
             Assert.Equal(expectedFile, name);
         }
         
@@ -47,7 +47,7 @@ namespace DarwinClient.Test
         public async void GetLatestThrowsExceptionWhenNotFound()
         {
             var source = new S3Source(DummyS3.CreateMock(), _logger);
-            var ex = await Assert.ThrowsAsync<DarwinException>(() =>  source.GetLatest("NOTHING", CancellationToken.None));
+            var ex = await Assert.ThrowsAsync<DarwinException>(() =>  source.Read("NOTHING", CancellationToken.None));
             Assert.Equal("Failed to download Darwin file NOTHING", ex.Message);
         }
     }

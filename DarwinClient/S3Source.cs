@@ -29,7 +29,7 @@ namespace DarwinClient
             _log = log;
         }
         
-        public async Task<(Stream, string)> GetLatest(string searchPattern, CancellationToken token)
+        public async Task<(Stream, string)> Read(string searchPattern, CancellationToken token)
         {
             S3Object archive = null;
             try

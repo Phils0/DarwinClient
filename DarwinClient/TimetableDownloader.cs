@@ -41,7 +41,13 @@ namespace DarwinClient
     /// </summary>
     public interface IDarwinDownloadSource
     {
-        Task<(Stream, string)> GetLatest(string searchPattern, CancellationToken token);
+        /// <summary>
+        /// Read the Darwin source data
+        /// </summary>
+        /// <param name="searchPattern">regex to find specific source</param>
+        /// <param name="token"></param>
+        /// <returns>Stream of data, if multiple possible sources returns the latest</returns>
+        Task<(Stream, string)> Read(string searchPattern, CancellationToken token);
     }
 
     /// <summary>
@@ -61,7 +67,7 @@ namespace DarwinClient
         public async Task<PportTimetableRef> GetReference(DateTime date, CancellationToken token)
         {
             var specificDate = $"{date:yyyyMMdd}\\d+_ref_v{ReferenceVersion.V3}";
-            var (stream, name) = await _source.GetLatest(specificDate, token);
+            var (stream, name) = await _source.Read(specificDate, token);
             using (stream)
                 return ExtractRefData(stream, name);
         }
@@ -78,7 +84,7 @@ namespace DarwinClient
 
         public async Task<PportTimetableRef> GetLatestReference(CancellationToken token)
         {
-            var (stream, name) = await _source.GetLatest(AllRefFiles, token);
+            var (stream, name) = await _source.Read(AllRefFiles, token);
             using (stream)
                 return ExtractRefData(stream, name);
         }
@@ -86,7 +92,7 @@ namespace DarwinClient
         public async Task<PportTimetable> GetTimetable(DateTime date, CancellationToken token)
         {
             var specificDate = $"{date:yyyyMMdd}\\d+_v{TimetableVersion.V8}";
-            var (stream, name) = await _source.GetLatest(specificDate, token);
+            var (stream, name) = await _source.Read(specificDate, token);
             using (stream)
                 return ExtractTimetable(stream, name);
         }
@@ -103,7 +109,7 @@ namespace DarwinClient
 
         public async Task<PportTimetable> GetLatestTimetable(CancellationToken token)
         {
-            var (stream, name) = await _source.GetLatest(AllTimetableFiles, token);
+            var (stream, name) = await _source.Read(AllTimetableFiles, token);
             using (stream)
                 return ExtractTimetable(stream, name);
         }

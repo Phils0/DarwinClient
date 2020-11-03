@@ -19,7 +19,7 @@ namespace DarwinClient
             _log = log;
         }
             
-        public Task<(Stream, string)> GetLatest(string searchPattern, CancellationToken token)
+        public Task<(Stream, string)> Read(string searchPattern, CancellationToken token)
         {
             FileInfo archive = null;            
             try
