@@ -9,13 +9,23 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	LICENSE = LICENSE
 	README.md = README.md
-	azure-pipelines.yml = azure-pipelines.yml
 	GitVersion.yml = GitVersion.yml
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarwinFilesDownloader", "DarwinFilesDownloader\DarwinFilesDownloader.csproj", "{56184CAB-78CE-4A75-87F4-8D77A90A00D6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarwinFileSink", "DarwinFileSink\DarwinFileSink.csproj", "{71886FD3-4AC2-4870-8145-BB1197B8E97F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{79109583-4016-4F2C-9018-FCFCC9EA52E8}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{70857DE6-538B-4E3F-AD6E-29BDE968180D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\package.yml = .github\workflows\package.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,5 +49,9 @@ Global
 		{71886FD3-4AC2-4870-8145-BB1197B8E97F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71886FD3-4AC2-4870-8145-BB1197B8E97F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71886FD3-4AC2-4870-8145-BB1197B8E97F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79109583-4016-4F2C-9018-FCFCC9EA52E8} = {FAFFA16E-CE00-44BD-894E-2DFE0F21BCC9}
+		{70857DE6-538B-4E3F-AD6E-29BDE968180D} = {79109583-4016-4F2C-9018-FCFCC9EA52E8}
 	EndGlobalSection
 EndGlobal
