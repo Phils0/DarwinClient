@@ -1,0 +1,79 @@
+name: Create Nuget Package
+
+on:
+  workflow_run:
+    workflows: [ "Build and test" ]
+    branches: [ main ]
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+        
+      - name: Setup .NET 7.0
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "7.0.x"
+  
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0
+        with:
+          versionSpec: "5.x"
+  
+      - name: Determine Version
+        id:   gitversion
+        uses: gittools/actions/gitversion/execute@v0
+        with:
+          useConfigFile: true
+  
+      - name: Build
+        run: dotnet build /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }}
+  
+      - name: Unit Test
+        run: dotnet test --no-build
+  
+      - name: Create Nuget package
+        run: dotnet pack DarwinClient/DarwinClient.csproj --no-build -o ${{ github.workspace }} -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }}
+  
+      - name: Save Nuget package
+        uses: actions/upload-artifact@v3
+        with:
+          name: Nuget package
+          path: ${{ github.workspace }}/*.nupkg
+
+      - name: Push Package to GitHub.com
+        run: dotnet nuget push *.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/phils0/index.json
+        
+      - name: Publish Package to NuGet.org
+        run: dotnet nuget push ${{ github.workspace }}/*.nupkg -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
+
+      - name: Create Tag
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { owner, repo } = context.repo
+            const tag_name = `v${{ steps.gitversion.outputs.AssemblySemVer }}`
+            const tag_message = `Release ${tag_name}`
+            const commit_sha = context.sha
+            await github.rest.git.createRef({
+              owner,
+              repo,
+              ref: `refs/tags/${tag_name}`,
+              sha: commit_sha
+            })
+            await github.rest.repos.createRelease({
+              owner,
+              repo,
+              tag_name,
+              name: tag_name,
+              body: tag_message
+            })

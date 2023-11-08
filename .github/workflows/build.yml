@@ -1,0 +1,28 @@
+name: Build and test
+
+on:
+ push:
+  branches: [ main ]
+ pull_request:
+ workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    name: Build and Test - ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 7.0
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "7.0.x"
+
+      - name: Unit Test
+        run: dotnet test

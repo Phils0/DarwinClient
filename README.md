@@ -1,8 +1,9 @@
 # Darwin.Client
 A .Net Standard 2.0 Library NRE Darwin Client
 
-[![Build Status](https://dev.azure.com/phils0oss/DarwinClient/_apis/build/status/Phils0.DarwinClient?branchName=master)](https://dev.azure.com/phils0oss/DarwinClient/_build/latest?definitionId=1&branchName=master)
- 
+![Build](https://github.com/phils0/DarwinClient/actions/workflows/build.yml/badge.svg)
+![Package](https://github.com/phils0/DarwinClient/actions/workflows/package.yml/badge.svg)
+
 ## How do I download the Darwin Timetable File?
  
 ```
