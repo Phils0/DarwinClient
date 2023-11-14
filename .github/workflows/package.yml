@@ -56,7 +56,7 @@ jobs:
         run: dotnet nuget push ${{ github.workspace }}/*.nupkg -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
 
       - name: Create Tag
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
