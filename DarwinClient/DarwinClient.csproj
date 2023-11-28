@@ -19,7 +19,7 @@
 
     <ItemGroup>
       <PackageReference Include="Apache.NMS.ActiveMQ.NetStd" Version="1.8.0" />
-      <PackageReference Include="AWSSDK.S3" Version="3.7.300" />
+      <PackageReference Include="AWSSDK.S3" Version="3.7.303.2" />
       <PackageReference Include="Serilog" Version="3.1.0" />
     </ItemGroup>
 
