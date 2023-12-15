@@ -44,7 +44,7 @@ jobs:
         run: dotnet pack DarwinClient/DarwinClient.csproj --no-build -o ${{ github.workspace }} -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }}
   
       - name: Save Nuget package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Nuget package
           path: ${{ github.workspace }}/*.nupkg
