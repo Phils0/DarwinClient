@@ -15,7 +15,7 @@
     <ItemGroup>
         <PackageReference Include="Apache.NMS.ActiveMQ.NetStd" Version="1.8.0" />
         <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
-        <PackageReference Include="AWSSDK.S3" Version="3.7.300" />
+        <PackageReference Include="AWSSDK.S3" Version="3.7.305.4" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
