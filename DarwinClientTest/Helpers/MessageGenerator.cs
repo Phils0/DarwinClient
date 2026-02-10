@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Apache.NMS;
-using DarwinClient.SchemaV16;
+using DarwinClient.Schema;
 using DarwinClient.Serialization;
 using NSubstitute;
 using Serilog;

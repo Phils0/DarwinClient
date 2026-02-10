@@ -1,5 +1,5 @@
 using System.IO;
-using DarwinClient.SchemaV16;
+using DarwinClient.Schema;
 using DarwinClient.Serialization;
 using DarwinClient.Test.Helpers;
 using NSubstitute;

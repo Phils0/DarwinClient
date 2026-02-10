@@ -27,6 +27,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\package.yml = .github\workflows\package.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{328E03D5-D2A4-433E-B62F-BC59EED1D50D}"
+	ProjectSection(SolutionItems) = preProject
+		docs\P75301004 Push Port Data Interface Specification Issue 24.pdf = docs\P75301004 Push Port Data Interface Specification Issue 24.pdf
+		docs\P75301004 Push Port Data Interface Specification Issue 24.txt = docs\P75301004 Push Port Data Interface Specification Issue 24.txt
+		docs\RSPS5053 P-01-01 Darwin PubSub via RDM.pdf = docs\RSPS5053 P-01-01 Darwin PubSub via RDM.pdf
+		docs\RSPS5053 P-01-01 Darwin PubSub via RDM.txt = docs\RSPS5053 P-01-01 Darwin PubSub via RDM.txt
+		docs\WA063A01624 Push Port ActiveMQ Interface Specification Issue 1.pdf = docs\WA063A01624 Push Port ActiveMQ Interface Specification Issue 1.pdf
+		docs\WA063A01624 Push Port ActiveMQ Interface Specification Issue 1.txt = docs\WA063A01624 Push Port ActiveMQ Interface Specification Issue 1.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +63,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{79109583-4016-4F2C-9018-FCFCC9EA52E8} = {FAFFA16E-CE00-44BD-894E-2DFE0F21BCC9}
 		{70857DE6-538B-4E3F-AD6E-29BDE968180D} = {79109583-4016-4F2C-9018-FCFCC9EA52E8}
+		{328E03D5-D2A4-433E-B62F-BC59EED1D50D} = {FAFFA16E-CE00-44BD-894E-2DFE0F21BCC9}
 	EndGlobalSection
 EndGlobal

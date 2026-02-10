@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using DarwinClient.SchemaV16;
+using DarwinClient.Schema;
 using DarwinClient.Serialization;
 using Serilog;
 

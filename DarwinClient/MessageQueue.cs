@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DarwinClient.SchemaV16;
+using DarwinClient.Schema;
 using Serilog;
 
 namespace DarwinClient

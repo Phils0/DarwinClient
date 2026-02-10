@@ -1,4 +1,4 @@
-﻿namespace DarwinClient.SchemaV16
+﻿namespace DarwinClient.Schema
 {
     public partial class PportTimetable
     {

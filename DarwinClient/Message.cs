@@ -1,6 +1,6 @@
 ﻿using System;
 using Apache.NMS;
-using DarwinClient.SchemaV16;
+using DarwinClient.Schema;
 
 namespace DarwinClient
 {
