@@ -72,7 +72,7 @@ namespace DarwinClient.Test.Helpers
         public static Pport CreateDarwinUpdates(string xml = XmlUrMessage, string sequenceNumber = TestMessage.PushportSequence)
         {
             var deserializer = new MessageDeserializer(Substitute.For<ILogger>());
-            return deserializer.Deserialize(xml, sequenceNumber);
+            return deserializer.Deserialize(xml, sequenceNumber)!;
         }
     }
 }

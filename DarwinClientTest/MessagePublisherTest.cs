@@ -28,7 +28,7 @@ namespace DarwinClient.Test
         {
             Assert.NotEmpty(target);
             var darwinMessage = target.Dequeue();
-            Assert.Equal(TestMessage.PushportSequence, darwinMessage.Message.PushportSequence);
+            Assert.Equal(TestMessage.PushportSequence, darwinMessage.Message?.PushportSequence);
         }
 
         [Fact(Skip = "Update to v18 message")]

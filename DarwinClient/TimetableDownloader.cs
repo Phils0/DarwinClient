@@ -30,10 +30,10 @@ namespace DarwinClient
     /// </summary>
     public interface ITimetableDownloader
     {
-        Task<PportTimetableRef> GetReference(DateTime date, CancellationToken token);
-        Task<PportTimetableRef> GetLatestReference(CancellationToken token);
-        Task<PportTimetable> GetTimetable(DateTime date, CancellationToken token);
-        Task<PportTimetable> GetLatestTimetable(CancellationToken token);
+        Task<TimetableReferenceFile> GetReference(DateTime date, CancellationToken token);
+        Task<TimetableReferenceFile> GetLatestReference(CancellationToken token);
+        Task<TimetableFile> GetTimetable(DateTime date, CancellationToken token);
+        Task<TimetableFile> GetLatestTimetable(CancellationToken token);
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ namespace DarwinClient
             _log = log;
         }
 
-        public async Task<PportTimetableRef> GetReference(DateTime date, CancellationToken token)
+        public async Task<TimetableReferenceFile> GetReference(DateTime date, CancellationToken token)
         {
             var specificDate = $"{date:yyyyMMdd}\\d+_ref_v{ReferenceVersion.V3}";
             var (stream, name) = await _source.Read(specificDate, token);
@@ -72,24 +72,24 @@ namespace DarwinClient
                 return ExtractRefData(stream, name);
         }
 
-        private PportTimetableRef ExtractRefData(Stream stream, string name)
+        private TimetableReferenceFile ExtractRefData(Stream stream, string name)
         {
             var extractor = new ReferenceDataDeserializer(_log);
             var data = extractor.Deserialize(stream, name);
-            data.File = name;
-            return data;
+
+            return new TimetableReferenceFile(name, data);
         }
 
         private static readonly string AllRefFiles = $"\\d+_ref_v{ReferenceVersion.V3}";
 
-        public async Task<PportTimetableRef> GetLatestReference(CancellationToken token)
+        public async Task<TimetableReferenceFile> GetLatestReference(CancellationToken token)
         {
             var (stream, name) = await _source.Read(AllRefFiles, token);
             using (stream)
                 return ExtractRefData(stream, name);
         }
 
-        public async Task<PportTimetable> GetTimetable(DateTime date, CancellationToken token)
+        public async Task<TimetableFile> GetTimetable(DateTime date, CancellationToken token)
         {
             var specificDate = $"{date:yyyyMMdd}\\d+_v{TimetableVersion.V8}";
             var (stream, name) = await _source.Read(specificDate, token);
@@ -97,17 +97,17 @@ namespace DarwinClient
                 return ExtractTimetable(stream, name);
         }
 
-        private PportTimetable ExtractTimetable(Stream stream, string name)
+        private TimetableFile ExtractTimetable(Stream stream, string name)
         {
             var extractor = new TimetableDeserializer(_log);
             var data = extractor.Deserialize(stream, name);
-            data.File = name;
-            return data;
+            
+            return new TimetableFile(name, data);
         }
 
         private static readonly string AllTimetableFiles = $"\\d+_v{TimetableVersion.V8}";
 
-        public async Task<PportTimetable> GetLatestTimetable(CancellationToken token)
+        public async Task<TimetableFile> GetLatestTimetable(CancellationToken token)
         {
             var (stream, name) = await _source.Read(AllTimetableFiles, token);
             using (stream)

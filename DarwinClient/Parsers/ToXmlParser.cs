@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
 using Apache.NMS;
@@ -17,7 +18,7 @@ namespace DarwinClient.Parsers
             _logger = logger;
         }
         
-        public bool TryParse(IMessage source, out Message? parsed)
+        public bool TryParse(IMessage source, [MaybeNullWhen(false)]  out Message parsed)
         {
             string msg;
             if (source is IBytesMessage byteMessage)

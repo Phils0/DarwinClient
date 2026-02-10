@@ -2,6 +2,6 @@
 {
     public partial class Pport
     {
-        public Message Message { get; set; }
+        public Message? Message { get; set; }
     }
 }

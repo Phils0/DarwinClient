@@ -6,7 +6,7 @@ namespace DarwinClient
 {
     internal class PushPortObserverParserComparer : IEqualityComparer<PushPortObservers>
     { 
-        public bool Equals(PushPortObservers x, PushPortObservers y)
+        public bool Equals(PushPortObservers? x, PushPortObservers? y)
         {
             return x?.Parser == y?.Parser;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Apache.NMS;
 using DarwinClient.Schema;
@@ -20,7 +21,7 @@ namespace DarwinClient.Parsers
             _deserializer = new MessageDeserializer(logger);
         }
         
-        public bool TryParse(IMessage source, out Message? parsed)
+        public bool TryParse(IMessage source, [MaybeNullWhen(false)] out Message parsed)
         {
             Pport? darwinMsgs = null;
             
@@ -37,6 +38,13 @@ namespace DarwinClient.Parsers
             }
             else
             {
+                parsed = null;
+                return false;
+            }
+            
+            if(darwinMsgs == null)
+            {
+                _logger.Error("DarwinMessage not set {timestamp}:{msg}", source.NMSTimestamp, source.NMSMessageId);
                 parsed = null;
                 return false;
             }

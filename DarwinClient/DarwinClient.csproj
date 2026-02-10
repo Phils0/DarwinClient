@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <LangVersion>latest</LangVersion>
         <Authors>Phil Sharp</Authors>
         <Description>UK Rail: NRE Darwin Client.  Has classes to listen to the pushport and download the timetable files</Description>
