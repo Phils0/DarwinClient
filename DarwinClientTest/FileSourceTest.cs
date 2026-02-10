@@ -10,15 +10,10 @@ namespace DarwinClient.Test
 {
     public class FileSourceTest
     {
-        private readonly ILogger _logger;
+        private readonly ILogger _logger = LoggingHelper.CreateLogger();
 
         private DirectoryInfo Directory => DummyS3.Directory;
-        
-        public FileSourceTest(ITestOutputHelper testOutputHelper)
-        {
-            _logger = LoggingHelper.CreateLogger();
-        }
-        
+
         [Fact] 
         public async Task RealFileGetLatest()
         {

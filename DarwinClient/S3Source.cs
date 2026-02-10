@@ -31,7 +31,7 @@ namespace DarwinClient
         
         public async Task<(Stream, string)> Read(string searchPattern, CancellationToken token)
         {
-            S3Object archive = null;
+            S3Object? archive = null;
             try
             {
                 archive = await Find(searchPattern, token);

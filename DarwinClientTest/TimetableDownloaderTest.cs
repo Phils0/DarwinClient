@@ -10,12 +10,7 @@ namespace DarwinClient.Test
 {
     public class TimetableDownloaderTest
     {
-        private readonly ILogger _logger;
-
-        public TimetableDownloaderTest(ITestOutputHelper testOutputHelper)
-        {
-            _logger = LoggingHelper.CreateLogger();
-        }
+        private readonly ILogger _logger = LoggingHelper.CreateLogger();
 
         [Fact(Skip = "Actual S3 calls, needs profile set")]
         public async Task RealDownloadSpecificReferenceData()

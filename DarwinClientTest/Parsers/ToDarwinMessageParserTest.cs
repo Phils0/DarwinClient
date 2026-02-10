@@ -24,7 +24,7 @@ namespace DarwinClient.Test.Parsers
             
             Assert.True(parser.TryParse(source, out var parsed));
             Assert.IsType<DarwinMessage>(parsed);
-            var darwinMsg = parsed as DarwinMessage;
+            var darwinMsg = (DarwinMessage) parsed;
             Assert.NotNull(darwinMsg.Updates);
         }
         
@@ -36,8 +36,8 @@ namespace DarwinClient.Test.Parsers
             var parser = new ToDarwinMessageParser(Substitute.For<ILogger>());
             
             Assert.True(parser.TryParse(source, out var parsed));
-
-            var darwinMsg = parsed as DarwinMessage;
+            Assert.IsType<DarwinMessage>(parsed);
+            var darwinMsg = (DarwinMessage) parsed;
             Assert.Equal(darwinMsg.PushportSequence, darwinMsg.PushportSequence);
         }
         
@@ -50,7 +50,7 @@ namespace DarwinClient.Test.Parsers
             
             Assert.True(parser.TryParse(source, out var parsed));
             Assert.IsType<DarwinMessage>(parsed);
-            var darwinMsg = parsed as DarwinMessage;
+            var darwinMsg = (DarwinMessage) parsed;
             Assert.NotNull(darwinMsg.Updates);
         }
     }

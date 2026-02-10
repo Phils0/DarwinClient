@@ -48,8 +48,8 @@ namespace DarwinClient.Test.Helpers
             };
             
             var properties = Substitute.For<IPrimitiveMap>();
-            properties.Contains(Arg.Any<string>()).Returns(x => lookup.ContainsKey(x[0] as string));
-            properties.GetString(Arg.Any<string>()).Returns(x => lookup[x[0] as string]);
+            properties.Contains(Arg.Any<string>()).Returns(x => lookup.ContainsKey((string) x[0]));
+            properties.GetString(Arg.Any<string>()).Returns(x => lookup[(string) x[0]]);
             return properties;
         }
         

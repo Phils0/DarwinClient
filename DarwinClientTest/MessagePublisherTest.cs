@@ -133,9 +133,9 @@ namespace DarwinClient.Test
             target1.Received().OnCompleted();
         }
 
-        private static IPushPortObserver CreateMockObserver(Type messageType = null)
+        private static IPushPortObserver CreateMockObserver(Type? messageType = null)
         {
-            messageType = messageType ?? typeof(DarwinMessage);
+            messageType ??= typeof(DarwinMessage);
             var target = Substitute.For<IPushPortObserver>();
             target.MessageType.Returns(messageType);
             return target;

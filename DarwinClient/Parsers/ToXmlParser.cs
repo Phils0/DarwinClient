@@ -17,7 +17,7 @@ namespace DarwinClient.Parsers
             _logger = logger;
         }
         
-        public bool TryParse(IMessage source, out Message parsed)
+        public bool TryParse(IMessage source, out Message? parsed)
         {
             string msg;
             if (source is IBytesMessage byteMessage)

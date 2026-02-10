@@ -9,13 +9,8 @@ namespace DarwinClient.Test
 {
     public class TimetableDownloaderFileSourceTest
     {
-        private readonly ILogger _logger;
+        private readonly ILogger _logger = LoggingHelper.CreateLogger();
 
-        public TimetableDownloaderFileSourceTest(ITestOutputHelper testOutputHelper)
-        {
-            _logger = LoggingHelper.CreateLogger();
-        }
-        
         private TimetableDownloader CreateDownloader()
         {
             var source = new FileSource(DummyS3.Directory, _logger);

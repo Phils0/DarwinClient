@@ -25,7 +25,7 @@ namespace DarwinClient.Serialization
                     _logger.Debug("Deserialize {id}", id);
                     using var decompressionStream = new GZipStream(stream, CompressionMode.Decompress);
                     using var reader = new StreamReader(decompressionStream);
-                    return Serializer.Deserialize(reader) as T;
+                    return (T) Serializer.Deserialize(reader);
                 }
             }
             catch (Exception e)
@@ -41,7 +41,7 @@ namespace DarwinClient.Serialization
             {
                 _logger.Debug("Deserialize {id}", id);
                 using var reader = new StringReader(input);
-                return Serializer.Deserialize(reader) as T;
+                return (T) Serializer.Deserialize(reader);
             }
             catch (Exception e)
             {

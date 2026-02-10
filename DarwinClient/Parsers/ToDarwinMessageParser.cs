@@ -20,9 +20,9 @@ namespace DarwinClient.Parsers
             _deserializer = new MessageDeserializer(logger);
         }
         
-        public bool TryParse(IMessage source, out Message parsed)
+        public bool TryParse(IMessage source, out Message? parsed)
         {
-            Pport darwinMsgs = null;
+            Pport? darwinMsgs = null;
             
             if (source is IBytesMessage byteMessage)
             {

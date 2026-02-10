@@ -96,8 +96,8 @@ namespace DarwinClient
         private readonly ILogger _logger;
         private readonly Dictionary<string, PushPortTopic> _topics = new Dictionary<string, PushPortTopic>();
 
-        private IConnection _connection;
-        private ISession _session;
+        private IConnection? _connection;
+        private ISession? _session;
 
         public PushPort(string url, ILogger logger, bool useDefaultTopics = true) : 
             this(new NMSConnectionFactory(new Uri(url)), logger, useDefaultTopics)

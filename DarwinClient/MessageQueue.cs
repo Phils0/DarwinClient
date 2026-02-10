@@ -18,7 +18,7 @@ namespace DarwinClient
 
         public bool IsLive { get; set; }
 
-        private IDisposable _unsubscriber;
+        private IDisposable? _unsubscriber;
         
         internal MessageQueue(ILogger logger)
         {

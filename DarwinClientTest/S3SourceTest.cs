@@ -10,13 +10,8 @@ namespace DarwinClient.Test
 {
     public class S3SourceTest
     {
-        private readonly ILogger _logger;
+        private readonly ILogger _logger = LoggingHelper.CreateLogger();
 
-        public S3SourceTest(ITestOutputHelper testOutputHelper)
-        {
-            _logger = LoggingHelper.CreateLogger();
-        }
-        
         [Fact(Skip = "Actual S3 calls, needs profile set")]
         public async Task RealS3GetLatest()
         {
