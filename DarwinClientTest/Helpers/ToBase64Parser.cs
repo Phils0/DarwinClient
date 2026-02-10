@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Apache.NMS;
 using DarwinClient.Parsers;
 using Serilog;
@@ -19,7 +20,7 @@ namespace DarwinClient.Test.Helpers
         {
             _logger = logger;
         }
-        public bool TryParse(IMessage source, out Message parsed)
+        public bool TryParse(IMessage source, [MaybeNullWhen(false)] out Message parsed)
         {
             string msg;
             if (source is IBytesMessage byteMessage)

@@ -95,8 +95,7 @@ namespace DarwinClient
         {
             foreach (var observers in _observers)
             {
-                Message darwinMessage;
-                if (!observers.Parser.TryParse(message, out darwinMessage))
+                if (!observers.Parser.TryParse(message, out var darwinMessage))
                 {
                     _logger.Warning("UnknownMessage @{timestamp}:{id} {msg}", message.NMSTimestamp,
                         message.NMSMessageId, message.NMSType);
@@ -105,7 +104,7 @@ namespace DarwinClient
 
                 foreach (var observer in observers)
                 {
-                    observer.OnNext(darwinMessage);
+                    observer.OnNext(darwinMessage!);
                 }
             }
         }

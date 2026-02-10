@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Amazon.S3;
 using DarwinClient.Test.Helpers;
-using NSubstitute;
 using Serilog;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace DarwinClient.Test
 {
     public class TimetableDownloaderTest
     {
-        private readonly ILogger _logger;
-
-        public TimetableDownloaderTest(ITestOutputHelper testOutputHelper)
-        {
-            _logger = LoggingHelper.CreateLogger(testOutputHelper);
-        }
+        private readonly ILogger _logger = LoggingHelper.CreateLogger();
 
         [Fact(Skip = "Actual S3 calls, needs profile set")]
-        public async void RealDownloadSpecificReferenceData()
+        public async Task RealDownloadSpecificReferenceData()
         {
              var downloader = CreateDownloader(Helpers.Amazon.GetS3Client());
              var refData =  await downloader.GetReference(DateTime.Today, CancellationToken.None);
@@ -39,27 +33,27 @@ namespace DarwinClient.Test
         }
 
         [Fact]
-        public async void DownloadSpecificReferenceData()
+        public async Task DownloadSpecificReferenceData()
         {
             var downloader = CreateDownloader(DummyS3.CreateMock());
             var refData = await downloader.GetReference(DummyS3.TestDate, CancellationToken.None);
             
             Assert.NotNull(refData);
-            Assert.Equal("PPTimetable/20200429020643_ref_v3.xml.gz", refData.File);
+            Assert.Equal("PPTimetable/20200429020643_ref_v3.xml.gz", refData.Name);
         }
         
         [Fact]
-        public async void DownloadLatestReferenceData()
+        public async Task DownloadLatestReferenceData()
         {
             var downloader = CreateDownloader(DummyS3.CreateSuccessfulRefDataMock());
             var refData = await downloader.GetLatestReference(CancellationToken.None);
             
             Assert.NotNull(refData);
-            Assert.Equal("PPTimetable/20200501020639_ref_v3.xml.gz", refData.File);
+            Assert.Equal("PPTimetable/20200501020639_ref_v3.xml.gz", refData.Name);
         }
         
         [Fact(Skip = "Actual S3 calls, needs profile set")]
-        public async void RealDownloadSpecificTimetable()
+        public async Task RealDownloadSpecificTimetable()
         {
             var downloader = CreateDownloader(Helpers.Amazon.GetS3Client());
             var timetable =  await downloader.GetTimetable(DateTime.Today, CancellationToken.None);
@@ -68,23 +62,23 @@ namespace DarwinClient.Test
          }
         
         [Fact]
-        public async void DownloadSpecificTimetable()
+        public async Task DownloadSpecificTimetable()
         {
             var downloader = CreateDownloader(DummyS3.CreateMock());
             var timetable = await downloader.GetTimetable(DummyS3.TestDate, CancellationToken.None);
             
             Assert.NotNull(timetable);
-            Assert.Equal("PPTimetable/20200429020643_v8.xml.gz", timetable.File);
+            Assert.Equal("PPTimetable/20200429020643_v8.xml.gz", timetable.Name);
         }
         
         [Fact]
-        public async void DownloadLatestTimetable()
+        public async Task DownloadLatestTimetable()
         {
             var downloader = CreateDownloader(DummyS3.CreateSuccessfulTimetableMock());
             var timetable = await downloader.GetLatestTimetable(CancellationToken.None);
             
             Assert.NotNull(timetable);
-            Assert.Equal("PPTimetable/20200501020639_v8.xml.gz", timetable.File);
+            Assert.Equal("PPTimetable/20200501020639_v8.xml.gz", timetable.Name);
         }
     }
 }

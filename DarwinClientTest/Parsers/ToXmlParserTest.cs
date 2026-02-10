@@ -26,7 +26,7 @@ namespace DarwinClient.Test.Parsers
             Assert.True(parser.TryParse(source, out var parsed));
             Assert.IsType<TextMessage>(parsed);
             
-            var xmlMsg = parsed as TextMessage;
+            var xmlMsg = (TextMessage) parsed;
             var doc = new XmlDocument();
             doc.LoadXml(xmlMsg.Content);
             Assert.NotEmpty(doc.ChildNodes);
@@ -42,7 +42,7 @@ namespace DarwinClient.Test.Parsers
             Assert.True(parser.TryParse(source, out var parsed));
             Assert.IsType<TextMessage>(parsed);
             
-            var xmlMsg = parsed as TextMessage;
+            var xmlMsg = (TextMessage) parsed;
             var doc = new XmlDocument();
             doc.LoadXml(xmlMsg.Content);
             Assert.NotEmpty(doc.ChildNodes);

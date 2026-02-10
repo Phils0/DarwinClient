@@ -48,8 +48,8 @@ namespace DarwinFileSink
             Console.WriteLine("*---------------------*");
             Console.WriteLine("Enter 'quit' to exit");
             Console.WriteLine("*---------------------*");
-            string line;
-            while((line = Console.ReadLine()) != "quit")
+
+            while((Console.ReadLine() ?? string.Empty) != "quit")
             {
             }
             source.Cancel();

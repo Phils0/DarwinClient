@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Apache.NMS;
-using DarwinClient.SchemaV16;
+using DarwinClient.Schema;
 using DarwinClient.Serialization;
 using NSubstitute;
 using Serilog;
@@ -48,8 +48,8 @@ namespace DarwinClient.Test.Helpers
             };
             
             var properties = Substitute.For<IPrimitiveMap>();
-            properties.Contains(Arg.Any<string>()).Returns(x => lookup.ContainsKey(x[0] as string));
-            properties.GetString(Arg.Any<string>()).Returns(x => lookup[x[0] as string]);
+            properties.Contains(Arg.Any<string>()).Returns(x => lookup.ContainsKey((string) x[0]));
+            properties.GetString(Arg.Any<string>()).Returns(x => lookup[(string) x[0]]);
             return properties;
         }
         
@@ -72,7 +72,7 @@ namespace DarwinClient.Test.Helpers
         public static Pport CreateDarwinUpdates(string xml = XmlUrMessage, string sequenceNumber = TestMessage.PushportSequence)
         {
             var deserializer = new MessageDeserializer(Substitute.For<ILogger>());
-            return deserializer.Deserialize(xml, sequenceNumber);
+            return deserializer.Deserialize(xml, sequenceNumber)!;
         }
     }
 }

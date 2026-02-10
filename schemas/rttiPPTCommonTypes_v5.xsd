@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v5" targetNamespace="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="5.0">
+	<!--  Copyright (c) 2021 RDG & Thales -->
+	<!--  Project 753 ATOC REAL TIME TRAIN INFORMATION -->
+	<!--  Project WA063A0 ATOC DARWIN -->
+	<!--  PUSH PORTS COMMON TYPES SCHEMA -->
+	<!--  
+	DATE			COMMENT
+	========	=======================================================================
+	01/11/2021  	Version 5:
+						Support for Train Loading Categories. (Note this file version does not replace previous versions, but is in addition).
+	-->
+	<!-- Simple Types -->
+	<xs:simpleType name="LoadingCategory">
+		<xs:annotation>
+			<xs:documentation>A category code for a level of Train Loading. Valid category codes are listed in the latest Push Port Reference Data file, along with a description of each code and suggested generic or TOC-specific UI elements.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UncertaintyStatus">
+		<xs:annotation>
+			<xs:documentation>An enumeration indication whether uncertainty is expected to cause delay, cancellation or other alteration.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Delay"/>
+			<xs:enumeration value="Cancellation"/>
+			<xs:enumeration value="Other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Complex Types -->
+</xs:schema>

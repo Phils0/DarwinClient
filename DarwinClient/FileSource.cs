@@ -21,7 +21,7 @@ namespace DarwinClient
             
         public Task<(Stream, string)> Read(string searchPattern, CancellationToken token)
         {
-            FileInfo archive = null;            
+            FileInfo? archive = null;            
             try
             {
                 archive = Find(searchPattern, token);

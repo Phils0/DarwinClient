@@ -1,0 +1,297 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "Darwin Real Time Train Information - Base Topic",
+    "description": "This is a JSON schema for the base topic within the Darwin Real Time Train Information Pub/Sub data product",
+    "type": "object",
+    "properties": {
+        "messageID": {
+            "title": "The message ID",
+            "type": "string",
+            "examples": [
+                "ID:STG1-dwnpp201-54580-638524095260649180-1:20:1:1:29076852"
+            ]
+        },
+        "messageType": {
+            "title": "The message type",
+            "type": "string",
+            "examples": [
+                "bytes"
+            ]
+        },
+        "timestamp": {
+            "title": "The timestamp",
+            "type": "integer",
+            "examples": [
+                1718020108301
+            ]
+        },
+        "deliveryMode": {
+            "title": "The delivery mode",
+            "type": "integer",
+            "examples": [
+                1
+            ]
+        },
+        "correlationID": {
+            "title": "The correlation ID",
+            "type": "string"
+        },
+        "replyTo": {
+            "title": "The reply to destination",
+            "type": "string"
+        },
+        "destination": {
+            "title": "The topic destination",
+            "type": "object",
+            "properties": {
+                "destinationType": {
+                    "title": "The topic destination type",
+                    "type": "string",
+                    "examples": [
+                        "queue"
+                    ]
+                },
+                "name": {
+                    "title": "The topic name",
+                    "type": "string",
+                    "examples": [
+                        "Consumer.rdmportal.VirtualTopic.PushPort-v18"
+                    ]
+                }
+            },
+            "examples": [{
+                "destinationType": "queue",
+                "name": ""
+            }]
+        },
+        "redelivered": {
+            "title": "The redelivered flag",
+            "type": "boolean",
+            "examples": [
+                false
+            ]
+        },
+        "type": {
+            "title": "The type"
+        },
+        "expiration": {
+            "title": "The expiration date and time",
+            "type": "integer",
+            "examples": [
+                1718020708301
+            ]
+        },
+        "priority": {
+            "title": "The message priority",
+            "type": "integer",
+            "examples": [
+                5
+            ]
+        },
+        "properties": {
+            "title": "The properties",
+            "type": "object",
+            "properties": {
+                "Username": {
+                    "title": "The username",
+                    "type": "object",
+                    "properties": {
+                        "propertyType": {
+                            "title": "The property type",
+                            "type": "string"
+                        },
+                        "boolean": {
+                            "type": "boolean"
+                        },
+                        "byte": {
+                            "type": "string"
+                        },
+                        "short": {
+                            "type": "integer"
+                        },
+                        "integer": {
+                            "type": "integer"
+                        },
+                        "long": {
+                            "type": "integer"
+                        },
+                        "float": {
+                            "type": "number"
+                        },
+                        "double": {
+                            "type": "number"
+                        },
+                        "string": {
+                            "type": "string",
+                            "examples": [
+                                "thales"
+                            ]
+                        },
+                        "bytes": {
+                            "type": "string"
+                        }
+                    },
+                    "examples": [{
+                        "propertyType": "string",
+                        "boolean": null,
+                        "byte": null,
+                        "short": null,
+                        "integer": null,
+                        "long": null,
+                        "float": null,
+                        "double": null,
+                        "string": "",
+                        "bytes": null
+                    }]
+                },
+                "PushPortSequence": {
+                    "title": "The PushPortSequence",
+                    "type": "object",
+                    "properties": {
+                        "propertyType": {
+                            "title": "The property type",
+                            "type": "string",
+                            "examples": [
+                                "string"
+                            ]
+                        },
+                        "boolean": {
+                            "type": "boolean"
+                        },
+                        "byte": {
+                            "type": "string"
+                        },
+                        "short": {
+                            "title": "integer"
+                        },
+                        "integer": {
+                            "type": "integer"
+                        },
+                        "long": {
+                            "type": "integer"
+                        },
+                        "float": {
+                            "type": "number"
+                        },
+                        "double": {
+                            "type": "number"
+                        },
+                        "string": {
+                            "type": "string",
+                            "examples": [
+                                "9120591"
+                            ]
+                        },
+                        "bytes": {
+                            "type": "string"
+                        }
+                    },
+                    "examples": [{
+                        "propertyType": "string",
+                        "boolean": null,
+                        "byte": null,
+                        "short": null,
+                        "integer": null,
+                        "long": null,
+                        "float": null,
+                        "double": null,
+                        "string": "9120591",
+                        "bytes": null
+                    }]
+                }
+            },
+            "examples": [{
+                "Username": {
+                    "propertyType": "string",
+                    "boolean": null,
+                    "byte": null,
+                    "short": null,
+                    "integer": null,
+                    "long": null,
+                    "float": null,
+                    "double": null,
+                    "string": "",
+                    "bytes": null
+                },
+                "PushPortSequence": {
+                    "propertyType": "string",
+                    "boolean": null,
+                    "byte": null,
+                    "short": null,
+                    "integer": null,
+                    "long": null,
+                    "float": null,
+                    "double": null,
+                    "string": "9120591",
+                    "bytes": null
+                }
+            }]
+        },
+        "bytes": {
+            "title": "The message in bytes",
+            "type": "string",
+            "examples": [
+                "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48UHBvcnQgeG1sbnM6ZmM9Imh0dHA6Ly93d3cudGhhbGVzZ3JvdXAuY29tL3J0dGkvUHVzaFBvcnQvRm9yZWNhc3RzL3Y0IiB4bWxuczpjdD0iaHR0cDovL3d3dy50aGFsZXNncm91cC5jb20vcnR0aS9QdXNoUG9ydC9Db21tb25UeXBlcy92MyIgdHM9IjIwMjQtMDYtMTBUMTI6NDg6MjguMzAxNDg5MiswMTowMCIgdmVyc2lvbj0iU1RHLTE3LjAiIHhtbG5zPSJodHRwOi8vd3d3LnRoYWxlc2dyb3VwLmNvbS9ydHRpL1B1c2hQb3J0L3YxNyI+PHVSIHVwZGF0ZU9yaWdpbj0iVEQiPjxUUyByaWQ9IjIwMjQwNjEwNzE0OTk1MSIgdWlkPSJHNDk5NTEiIHNzZD0iMjAyNC0wNi0xMCI+PGZjOkxvY2F0aW9uIHRwbD0iU1RQWEJPWCIgd3RhPSIxMjo0NzozMCIgd3RkPSIxMjo0ODozMCIgcHRhPSIxMjo0OCIgcHRkPSIxMjo0OCI+PGZjOmFyciBhdD0iMTI6NDciIGF0Q2xhc3M9IkF1dG9tYXRpYyIgc3JjPSJURCIgLz48ZmM6ZGVwIGF0PSIxMjo0OCIgYXRDbGFzcz0iQXV0b21hdGljIiBzcmM9IlREIiAvPjxmYzpwbGF0IHBsYXRzcmM9IkEiIGNvbmY9InRydWUiPkI8L2ZjOnBsYXQ+PGZjOmxlbmd0aD44PC9mYzpsZW5ndGg+PC9mYzpMb2NhdGlvbj48L1RTPjwvdVI+PC9QcG9ydD4="
+            ]
+        },
+        "map": {
+            "title": "The map",
+            "type": "null",
+            "examples": [
+                null
+            ]
+        },
+        "text": {
+            "title": "The text",
+            "type": "null",
+            "examples": [
+                null
+            ]
+        }
+    },
+    "examples": [{
+        "messageID": "",
+        "messageType": "bytes",
+        "timestamp": 1718020108301,
+        "deliveryMode": 1,
+        "correlationID": null,
+        "replyTo": null,
+        "destination": {
+            "destinationType": "queue",
+            "name": ""
+        },
+        "redelivered": false,
+        "type": null,
+        "expiration": 1718020708301,
+        "priority": 5,
+        "properties": {
+            "Username": {
+                "propertyType": "string",
+                "boolean": null,
+                "byte": null,
+                "short": null,
+                "integer": null,
+                "long": null,
+                "float": null,
+                "double": null,
+                "string": "thales",
+                "bytes": null
+            },
+            "PushPortSequence": {
+                "propertyType": "string",
+                "boolean": null,
+                "byte": null,
+                "short": null,
+                "integer": null,
+                "long": null,
+                "float": null,
+                "double": null,
+                "string": "9120591",
+                "bytes": null
+            }
+        },
+        "bytes": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48UHBvcnQgeG1sbnM6ZmM9Imh0dHA6Ly93d3cudGhhbGVzZ3JvdXAuY29tL3J0dGkvUHVzaFBvcnQvRm9yZWNhc3RzL3Y0IiB4bWxuczpjdD0iaHR0cDovL3d3dy50aGFsZXNncm91cC5jb20vcnR0aS9QdXNoUG9ydC9Db21tb25UeXBlcy92MyIgdHM9IjIwMjQtMDYtMTBUMTI6NDg6MjguMzAxNDg5MiswMTowMCIgdmVyc2lvbj0iU1RHLTE3LjAiIHhtbG5zPSJodHRwOi8vd3d3LnRoYWxlc2dyb3VwLmNvbS9ydHRpL1B1c2hQb3J0L3YxNyI+PHVSIHVwZGF0ZU9yaWdpbj0iVEQiPjxUUyByaWQ9IjIwMjQwNjEwNzE0OTk1MSIgdWlkPSJHNDk5NTEiIHNzZD0iMjAyNC0wNi0xMCI+PGZjOkxvY2F0aW9uIHRwbD0iU1RQWEJPWCIgd3RhPSIxMjo0NzozMCIgd3RkPSIxMjo0ODozMCIgcHRhPSIxMjo0OCIgcHRkPSIxMjo0OCI+PGZjOmFyciBhdD0iMTI6NDciIGF0Q2xhc3M9IkF1dG9tYXRpYyIgc3JjPSJURCIgLz48ZmM6ZGVwIGF0PSIxMjo0OCIgYXRDbGFzcz0iQXV0b21hdGljIiBzcmM9IlREIiAvPjxmYzpwbGF0IHBsYXRzcmM9IkEiIGNvbmY9InRydWUiPkI8L2ZjOnBsYXQ+PGZjOmxlbmd0aD44PC9mYzpsZW5ndGg+PC9mYzpMb2NhdGlvbj48L1RTPjwvdVI+PC9QcG9ydD4=",
+        "map": null,
+        "text": null
+    }]
+}

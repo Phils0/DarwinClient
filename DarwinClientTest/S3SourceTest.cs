@@ -1,24 +1,19 @@
 using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using DarwinClient.Test.Helpers;
 using Serilog;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace DarwinClient.Test
 {
     public class S3SourceTest
     {
-        private readonly ILogger _logger;
+        private readonly ILogger _logger = LoggingHelper.CreateLogger();
 
-        public S3SourceTest(ITestOutputHelper testOutputHelper)
-        {
-            _logger = LoggingHelper.CreateLogger(testOutputHelper);
-        }
-        
         [Fact(Skip = "Actual S3 calls, needs profile set")]
-        public async void RealS3GetLatest()
+        public async Task RealS3GetLatest()
         {
             var source = new S3Source(Helpers.Amazon.GetS3Client(), _logger);
             var (stream, name) =  await source.Read($"\\d+_ref_v.", CancellationToken.None);
@@ -36,7 +31,7 @@ namespace DarwinClient.Test
         [InlineData("20200430\\d+_v8", @"PPTimetable/20200430020644_v8.xml.gz")]
         [InlineData("20200501\\d+_v8", @"PPTimetable/20200501020639_v8.xml.gz")]
         [InlineData("\\d+_v8", @"PPTimetable/20200501020639_v8.xml.gz")]
-        public async void GetLatest(string searchPattern, string expectedFile)
+        public async Task GetLatest(string searchPattern, string expectedFile)
         {
             var source = new S3Source(DummyS3.CreateMock(), _logger);
             var (stream, name) =  await source.Read(searchPattern, CancellationToken.None);
@@ -44,7 +39,7 @@ namespace DarwinClient.Test
         }
         
         [Fact]
-        public async void GetLatestThrowsExceptionWhenNotFound()
+        public async Task GetLatestThrowsExceptionWhenNotFound()
         {
             var source = new S3Source(DummyS3.CreateMock(), _logger);
             var ex = await Assert.ThrowsAsync<DarwinException>(() =>  source.Read("NOTHING", CancellationToken.None));

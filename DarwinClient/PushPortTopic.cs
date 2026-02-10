@@ -11,7 +11,7 @@ namespace DarwinClient
         private readonly IMessagePublisher _publisher;
         private readonly ILogger _logger;
         
-        private IMessageConsumer _consumer;
+        private IMessageConsumer? _consumer;
         
         internal PushPortTopic(string topic, IMessagePublisher publisher, ILogger logger)
         {

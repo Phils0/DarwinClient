@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ct="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v1" xmlns:ct3="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v3" xmlns:ct5="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v5" xmlns:tns="http://www.thalesgroup.com/rtti/PushPort/Formations/v3" targetNamespace="http://www.thalesgroup.com/rtti/PushPort/Formations/v3" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.0">
+	<!--  Copyright (c) 2017 RDG & Thales -->
+	<!--  Project 753 ATOC REAL TIME TRAIN INFORMATION -->
+	<!--  Project WA063A0 ATOC DARWIN -->
+	<!--  PUSH PORTS FORMATIONS SCHEMA -->
+	<!--  
+	DATE			COMMENT
+	========	=======================================================================
+	01/11/2021  	Version 3:
+						Support for Train Loading Categories
+	-->
+	<xs:import namespace="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v1" schemaLocation="rttiPPTCommonTypes_v1.xsd"/>
+	<xs:import namespace="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v3" schemaLocation="rttiPPTCommonTypes_v3.xsd"/>
+	<xs:import namespace="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v5" schemaLocation="rttiPPTCommonTypes_v5.xsd"/>
+	<!-- Simple Types -->
+	<xs:simpleType name="LoadingValueType">
+		<xs:annotation>
+			<xs:documentation>The "type" of loading data provided. "Typical" loading data is sourced from historic data related to previous services that have run."Expected" data is specific to the service to which it is attached.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Typical"/>
+			<xs:enumeration value="Expected"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Attribute Groups -->
+	<xs:attributeGroup name="LoadingAttrs">
+		<xs:attribute name="type" type="tns:LoadingValueType" use="optional" default="Typical">
+			<xs:annotation>
+				<xs:documentation>The "type" of loading data provided.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="src" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>The source of the loading data.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="srcInst" type="ct:SourceTypeInst" use="optional">
+			<xs:annotation>
+				<xs:documentation>The RTTI instance ID of the src (if any).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<!-- Complex Types -->
+	<xs:complexType name="LoadingData">
+		<xs:annotation>
+			<xs:documentation>Values representing the loading of a service. Loading may be expressed as a category or a percentage value, or both.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="loadingCategory" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A category code for a level of Train Loading. Valid category codes are listed in the latest Push Port Reference Data file, along with a description of each code and suggested generic or TOC-specific UI elements.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="ct5:LoadingCategory">
+							<xs:attributeGroup ref="tns:LoadingAttrs"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="loadingPercentage" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A value representing the loading as a percentage (0-100%).</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="ct3:LoadingValue">
+							<xs:attributeGroup ref="tns:LoadingAttrs"/>
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="rid" type="ct:RIDType" use="required">
+			<xs:annotation>
+				<xs:documentation>RTTI unique Train ID</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="tpl" type="ct:TiplocType" use="required">
+			<xs:annotation>
+				<xs:documentation>TIPLOC where the loading data applies.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attributeGroup ref="ct:CircularTimes"/>
+	</xs:complexType>
+</xs:schema>

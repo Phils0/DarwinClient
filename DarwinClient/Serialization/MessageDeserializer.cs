@@ -1,4 +1,4 @@
-﻿using DarwinClient.SchemaV16;
+﻿using DarwinClient.Schema;
 using Serilog;
 
 namespace DarwinClient.Serialization

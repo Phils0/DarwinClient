@@ -1,13 +1,7 @@
-﻿using DarwinClient.SchemaV16;
+﻿using DarwinClient.Schema;
 using Serilog;
 
 namespace DarwinClient.Serialization
 {
-    public class TimetableDeserializer : Deserializer<PportTimetable>
-    {
-        public TimetableDeserializer(ILogger logger) :
-            base(logger)
-        {
-        }
-    }
+    public class TimetableDeserializer(ILogger logger) : Deserializer<PportTimetable>(logger);
 }

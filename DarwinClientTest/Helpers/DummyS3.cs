@@ -68,6 +68,7 @@ namespace DarwinClient.Test.Helpers
             }
             catch (Exception e)
             {
+                Serilog.Log.Logger.Warning("Dummy S3 error: {e}", e);
                 return CreateDummyObject();
             }
 
