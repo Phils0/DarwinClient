@@ -14,14 +14,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
         
-      - name: Setup .NET 7.0
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET 10.0
+        uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: "7.0.x"
+          dotnet-version: "10.0.x"
   
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0
@@ -44,7 +44,7 @@ jobs:
         run: dotnet pack DarwinClient/DarwinClient.csproj --no-build -o ${{ github.workspace }} -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }}
   
       - name: Save Nuget package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: Nuget package
           path: ${{ github.workspace }}/*.nupkg
@@ -56,7 +56,7 @@ jobs:
         run: dotnet nuget push ${{ github.workspace }}/*.nupkg -k ${{ secrets.NUGET_ORG_API_KEY }} -s https://api.nuget.org/v3/index.json
 
       - name: Create Tag
-        uses: actions/github-script@v6
+        uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
