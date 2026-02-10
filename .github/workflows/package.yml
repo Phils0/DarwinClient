@@ -35,13 +35,13 @@ jobs:
           useConfigFile: true
   
       - name: Build
-        run: dotnet build /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }}
+        run: dotnet build -c Release /p:Version=${{ steps.gitversion.outputs.AssemblySemVer }}
   
       - name: Unit Test
-        run: dotnet test --no-build
+        run: dotnet test -c Release --no-build
   
       - name: Create Nuget package
-        run: dotnet pack DarwinClient/DarwinClient.csproj --no-build -o ${{ github.workspace }} -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }}
+        run: dotnet pack DarwinClient/DarwinClient.csproj -c Release --no-build -o ${{ github.workspace }} -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersion }}
   
       - name: Save Nuget package
         uses: actions/upload-artifact@v6
