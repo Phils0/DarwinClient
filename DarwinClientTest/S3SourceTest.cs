@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DarwinClient.Test.Helpers;
 using Serilog;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace DarwinClient.Test
 {
@@ -15,7 +14,7 @@ namespace DarwinClient.Test
 
         public S3SourceTest(ITestOutputHelper testOutputHelper)
         {
-            _logger = LoggingHelper.CreateLogger(testOutputHelper);
+            _logger = LoggingHelper.CreateLogger();
         }
         
         [Fact(Skip = "Actual S3 calls, needs profile set")]

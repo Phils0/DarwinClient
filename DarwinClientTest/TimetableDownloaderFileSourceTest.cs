@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Amazon.S3;
 using DarwinClient.Test.Helpers;
-using NSubstitute;
 using Serilog;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace DarwinClient.Test
 {
@@ -16,7 +13,7 @@ namespace DarwinClient.Test
 
         public TimetableDownloaderFileSourceTest(ITestOutputHelper testOutputHelper)
         {
-            _logger = LoggingHelper.CreateLogger(testOutputHelper);
+            _logger = LoggingHelper.CreateLogger();
         }
         
         private TimetableDownloader CreateDownloader()

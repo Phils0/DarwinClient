@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using DarwinClient.Test.Helpers;
 using Serilog;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace DarwinClient.Test
 {
@@ -17,7 +16,7 @@ namespace DarwinClient.Test
         
         public FileSourceTest(ITestOutputHelper testOutputHelper)
         {
-            _logger = LoggingHelper.CreateLogger(testOutputHelper);
+            _logger = LoggingHelper.CreateLogger();
         }
         
         [Fact] 

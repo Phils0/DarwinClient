@@ -1,24 +1,17 @@
 ﻿using Serilog;
 using Serilog.Formatting.Display;
-using Xunit.Abstractions;
+using Serilog.Sinks.XUnit3;
+using Xunit;
 
 namespace DarwinClient.Test.Helpers
 {
     internal static class LoggingHelper
     {
-        public static ILogger CreateLogger(ITestOutputHelper testOutputHelper)
+        public static ILogger CreateLogger()
         {
             return new LoggerConfiguration()
                 .MinimumLevel.Verbose()
-                .WriteTo.TestOutput(testOutputHelper)
-                .CreateLogger();
-        }
-        
-        public static ILogger CreateMessageLogger(ITestOutputHelper testOutputHelper)
-        {
-            return new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .WriteTo.TestOutput(testOutputHelper, new MessageTemplateTextFormatter("{Message}"))
+                .WriteTo.XUnit3TestOutput()
                 .CreateLogger();
         }
     }

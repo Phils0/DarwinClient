@@ -3,10 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amazon.S3;
 using DarwinClient.Test.Helpers;
-using NSubstitute;
 using Serilog;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace DarwinClient.Test
 {
@@ -16,7 +14,7 @@ namespace DarwinClient.Test
 
         public TimetableDownloaderTest(ITestOutputHelper testOutputHelper)
         {
-            _logger = LoggingHelper.CreateLogger(testOutputHelper);
+            _logger = LoggingHelper.CreateLogger();
         }
 
         [Fact(Skip = "Actual S3 calls, needs profile set")]
