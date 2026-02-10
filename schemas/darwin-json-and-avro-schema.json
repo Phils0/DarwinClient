@@ -1,0 +1,370 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "Darwin Real Time Train Information - JSON and AVRO Topics",
+    "description": "This is a JSON schema for the JSON and AVRO topics within the Darwin Real Time Train Information Pub/Sub data product",
+    "type": "object",
+    "properties": {
+        "destination": {
+            "title": "The topic destination",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "The topic destination name",
+                    "type": "string",
+                    "examples": [
+                        "Consumer.rdmportal.VirtualTopic.PushPort-v18"
+                    ]
+                },
+                "destinationType": {
+                    "title": "The topic destination type",
+                    "type": "string",
+                    "examples": [
+                        "queue"
+                    ]
+                }
+            },
+            "examples": [{
+                "name": "Consumer.rdmportal.VirtualTopic.PushPort-v18",
+                "destinationType": "queue"
+            }]
+        },
+        "messageID": {
+            "title": "The message ID",
+            "type": "string",
+            "examples": [
+                "ID:STG1-dwnpp201-54580-638524095260649180-1:20:1:1:29076852"
+            ]
+        },
+        "type": {
+            "title": "The type"
+        },
+        "priority": {
+            "title": "The message priority",
+            "type": "integer",
+            "examples": [
+                5
+            ]
+        },
+        "redelivered": {
+            "title": "The redelivered flag",
+            "type": "boolean",
+            "examples": [
+                false
+            ]
+        },
+        "messageType": {
+            "title": "The message type",
+            "type": "string",
+            "examples": [
+                "bytes"
+            ]
+        },
+        "deliveryMode": {
+            "title": "The delivery mode",
+            "type": "integer",
+            "examples": [
+                1
+            ]
+        },
+        "bytes": {
+            "title": "The message in bytes",
+            "type": "string",
+            "examples": [
+                "{\"ts\":\"2024-06-10T12:23:26.0099787+01:00\",\"version\":\"STG-17.0\",\"uR\":{\"updateOrigin\":\"CIS\",\"requestSource\":\"at10\",\"requestID\":\"0000000000010853\"}}"
+            ]            
+        },
+        "replyTo": {
+            "title": "The reply to destination",
+            "type": "string"
+        },
+        "correlationID": {
+            "title": "The correlationID",
+            "type": "null",
+            "examples": [
+                null
+            ]
+        },
+        "expiration": {
+            "title": "The expiration",
+            "description": "The expiration date and time as a Unix timestamp",
+            "type": "integer",
+            "examples": [
+                1718019206009
+            ]
+        },
+        "text": {
+            "title": "The text",
+            "type": "null",
+            "examples": [
+                null
+            ]
+        },
+        "map": {
+            "title": "The map",
+            "type": "null",
+            "examples": [
+                null
+            ]
+        },
+        "properties": {
+            "title": "The properties",
+            "type": "object",
+            "properties": {
+                "Username": {
+                    "title": "The Username",
+                    "type": "object",
+                    "properties": {
+                        "boolean": {
+                            "title": "The boolean",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "string": {
+                            "title": "The string",
+                            "type": "string",
+                            "examples": [
+                                "thales"
+                            ]
+                        },
+                        "byte": {
+                            "title": "The byte",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "double": {
+                            "title": "The double",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "bytes": {
+                            "title": "The bytes",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "propertyType": {
+                            "title": "The propertyType",
+                            "type": "string",
+                            "examples": [
+                                "string"
+                            ]
+                        },
+                        "short": {
+                            "title": "The short",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "integer": {
+                            "title": "The integer",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "float": {
+                            "title": "The float",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "long": {
+                            "title": "The long",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "boolean": null,
+                        "string": "",
+                        "byte": null,
+                        "double": null,
+                        "bytes": null,
+                        "propertyType": "string",
+                        "short": null,
+                        "integer": null,
+                        "float": null,
+                        "long": null
+                    }]
+                },
+                "PushPortSequence": {
+                    "title": "The PushPortSequence",
+                    "type": "object",
+                    "properties": {
+                        "boolean": {
+                            "title": "The boolean",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "string": {
+                            "title": "The string",
+                            "type": "string",
+                            "examples": [
+                                ""
+                            ]
+                        },
+                        "byte": {
+                            "title": "The byte",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "double": {
+                            "title": "The double",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "bytes": {
+                            "title": "The bytes",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "propertyType": {
+                            "title": "The propertyType",
+                            "type": "string",
+                            "examples": [
+                                "string"
+                            ]
+                        },
+                        "short": {
+                            "title": "The short",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "integer": {
+                            "title": "The integer",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "float": {
+                            "title": "The float",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        },
+                        "long": {
+                            "title": "The long",
+                            "type": "null",
+                            "examples": [
+                                null
+                            ]
+                        }
+                    },
+                    "examples": [{
+                        "boolean": null,
+                        "string": "",
+                        "byte": null,
+                        "double": null,
+                        "bytes": null,
+                        "propertyType": "string",
+                        "short": null,
+                        "integer": null,
+                        "float": null,
+                        "long": null
+                    }]
+                }
+            },
+            "examples": [{
+                "Username": {
+                    "boolean": null,
+                    "string": "",
+                    "byte": null,
+                    "double": null,
+                    "bytes": null,
+                    "propertyType": "string",
+                    "short": null,
+                    "integer": null,
+                    "float": null,
+                    "long": null
+                },
+                "PushPortSequence": {
+                    "boolean": null,
+                    "string": "",
+                    "byte": null,
+                    "double": null,
+                    "bytes": null,
+                    "propertyType": "string",
+                    "short": null,
+                    "integer": null,
+                    "float": null,
+                    "long": null
+                }
+            }]
+        },
+        "timestamp": {
+            "title": "The timestamp",
+            "type": "integer",
+            "examples": [
+                1718018606009
+            ]
+        }
+    },
+    "examples": [{
+        "destination": {
+            "name": "",
+            "destinationType": "queue"
+        },
+        "messageID": "",
+        "type": null,
+        "priority": 5,
+        "redelivered": false,
+        "messageType": "bytes",
+        "deliveryMode": 1,
+        "bytes": "{\"ts\":\"2024-06-10T12:23:26.0099787+01:00\",\"version\":\"STG-17.0\",\"uR\":{\"updateOrigin\":\"CIS\",\"requestSource\":\"at10\",\"requestID\":\"0000000000010853\"}}",
+        "replyTo": null,
+        "correlationID": null,
+        "expiration": 1718019206009,
+        "text": null,
+        "map": null,
+        "properties": {
+            "Username": {
+                "boolean": null,
+                "string": "thales",
+                "byte": null,
+                "double": null,
+                "bytes": null,
+                "propertyType": "string",
+                "short": null,
+                "integer": null,
+                "float": null,
+                "long": null
+            },
+            "PushPortSequence": {
+                "boolean": null,
+                "string": "",
+                "byte": null,
+                "double": null,
+                "bytes": null,
+                "propertyType": "string",
+                "short": null,
+                "integer": null,
+                "float": null,
+                "long": null
+            }
+        },
+        "timestamp": 1718018606009
+    }]
+}
