@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Amazon.S3;
 using DarwinClient.Test.Helpers;
 using NSubstitute;
@@ -25,7 +26,7 @@ namespace DarwinClient.Test
         }
 
         [Fact]
-        public async void DownloadSpecificReferenceData()
+        public async Task DownloadSpecificReferenceData()
         {
             var downloader = CreateDownloader();
             var refData = await downloader.GetReference(DummyS3.TestDate, CancellationToken.None);
@@ -35,7 +36,7 @@ namespace DarwinClient.Test
         }
         
         [Fact]
-        public async void DownloadLatestReferenceData()
+        public async Task DownloadLatestReferenceData()
         {
             var downloader = CreateDownloader();
             var refData = await downloader.GetLatestReference(CancellationToken.None);
@@ -45,7 +46,7 @@ namespace DarwinClient.Test
         }
         
         [Fact]
-        public async void DownloadSpecificTimetable()
+        public async Task DownloadSpecificTimetable()
         {
             var downloader = CreateDownloader();
             var timetable = await downloader.GetTimetable(DummyS3.TestDate, CancellationToken.None);
@@ -55,7 +56,7 @@ namespace DarwinClient.Test
         }
         
         [Fact]
-        public async void DownloadLatestTimetable()
+        public async Task DownloadLatestTimetable()
         {
             var downloader = CreateDownloader();
             var timetable = await downloader.GetLatestTimetable(CancellationToken.None);
