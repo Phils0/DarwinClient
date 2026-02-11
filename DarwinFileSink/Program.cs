@@ -11,7 +11,7 @@ namespace DarwinFileSink
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -43,7 +43,7 @@ namespace DarwinFileSink
             CancellationTokenSource source = new CancellationTokenSource();
             CancellationToken token = source.Token;
             
-            var task = Task.Run(() => ReadQueue(hostUrl, user, password, token));
+            var readQueueTask = Task.Run(() => ReadQueue(hostUrl, user, password, token), token);
             
             Console.WriteLine("*---------------------*");
             Console.WriteLine("Enter 'quit' to exit");
@@ -52,7 +52,20 @@ namespace DarwinFileSink
             while((Console.ReadLine() ?? string.Empty) != "quit")
             {
             }
-            source.Cancel();
+            await source.CancelAsync();
+
+            try
+            {
+                await readQueueTask;
+            }
+            catch (OperationCanceledException)
+            {
+                Log.Information("Operation cancelled");
+            }
+            catch (Exception ex)
+            {
+                Log.Error("An exception occured {ex}", ex);
+            }
             
             Log.Information("Done");
         }
