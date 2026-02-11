@@ -14,34 +14,37 @@ namespace DarwinClient.Test.Helpers
     {
         public static DirectoryInfo Directory => new DirectoryInfo(Path.Combine(".", "Data"));
         
-        public static DateTime TestDate = new DateTime(2020, 4, 29);
-        public static string ReferenceData = Path.Combine(".", "Data", "20200429020643_ref_v3.xml.gz");
-        public static string ReferenceDataV2 = Path.Combine(".", "Data", "20200415020643_ref_v2.xml.gz");
-        public static string Timetable = Path.Combine(".", "Data", "20200429020643_v8.xml.gz");
+        public static DateTime TestDate = new DateTime(2026, 2, 1);
+        public static string ReferenceData = Path.Combine(".", "Data", "20260201020500_ref_v4.xml.gz");
+        public static string ReferenceDataV3 = Path.Combine(".", "Data", "20260201020500_ref_v3.xml.gz");
+        public static string Timetable = Path.Combine(".", "Data", "20260201020500_v8.xml.gz");
 
         public static List<S3Object> DarwinFiles => new List<S3Object>()
         {
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_ref_v1.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_ref_v2.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_ref_v3.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_ref_v4.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_ref_v99.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_v4.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_v5.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_v6.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_v7.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20260201020500_v8.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_ref_v1.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_ref_v2.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_ref_v3.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_ref_v4.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_ref_v99.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_v4.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_v5.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_v6.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_v7.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200429020643_v8.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_ref_v1.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_ref_v2.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_ref_v3.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_ref_v99.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_v4.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_v5.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_v6.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_v7.xml.gz"},
-            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200430020644_v8.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200501020639_ref_v1.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200501020639_ref_v2.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200501020639_ref_v3.xml.gz"},
+            new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200501020639_ref_v4.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200501020639_ref_v99.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200501020639_v4.xml.gz"},
             new S3Object() {BucketName = "darwin.xmltimetable", Key = "PPTimetable/20200501020639_v5.xml.gz"},

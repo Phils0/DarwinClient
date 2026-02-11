@@ -25,13 +25,14 @@ namespace DarwinClient.Test
         }
         
         [Theory]
-        [InlineData("20200429\\d+_ref_v2", @"PPTimetable/20200429020643_ref_v2.xml.gz")]
+        [InlineData("20260201\\d+_ref_v4", @"PPTimetable/20260201020500_ref_v4.xml.gz")]
         [InlineData("20200429\\d+_ref_v3", @"PPTimetable/20200429020643_ref_v3.xml.gz")]
-        [InlineData("\\d+_ref_v3", @"PPTimetable/20200501020639_ref_v3.xml.gz")]
-        [InlineData("20200430\\d+_v8", @"PPTimetable/20200430020644_v8.xml.gz")]
-        [InlineData("20200501\\d+_v8", @"PPTimetable/20200501020639_v8.xml.gz")]
-        [InlineData("\\d+_v8", @"PPTimetable/20200501020639_v8.xml.gz")]
-        public async Task GetLatest(string searchPattern, string expectedFile)
+        [InlineData("\\d+_ref_v3", @"PPTimetable/20260201020500_ref_v3.xml.gz")]
+        [InlineData("\\d+_ref_v4", @"PPTimetable/20260201020500_ref_v4.xml.gz")]
+        [InlineData("20200429\\d+_v8", @"PPTimetable/20200429020643_v8.xml.gz")]
+        [InlineData("20260201\\d+_v8", @"PPTimetable/20260201020500_v8.xml.gz")]
+        [InlineData("\\d+_v8", @"PPTimetable/20260201020500_v8.xml.gz")]
+        public async Task ReadReturnLatestFileThatSatisfiesTheSearch(string searchPattern, string expectedFile)
         {
             var source = new S3Source(DummyS3.CreateMock(), _logger);
             var (stream, name) =  await source.Read(searchPattern, CancellationToken.None);
@@ -39,7 +40,7 @@ namespace DarwinClient.Test
         }
         
         [Fact]
-        public async Task GetLatestThrowsExceptionWhenNotFound()
+        public async Task ReadThrowsExceptionWhenNotFound()
         {
             var source = new S3Source(DummyS3.CreateMock(), _logger);
             var ex = await Assert.ThrowsAsync<DarwinException>(() =>  source.Read("NOTHING", CancellationToken.None));

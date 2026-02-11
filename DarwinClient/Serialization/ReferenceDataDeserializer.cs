@@ -3,11 +3,5 @@ using Serilog;
 
 namespace DarwinClient.Serialization
 {
-    public class ReferenceDataDeserializer : Deserializer<PportTimetableRef>
-    {
-        public ReferenceDataDeserializer(ILogger logger) :
-            base(logger)
-        {
-        }
-    }
+    public class ReferenceDataDeserializer(ILogger logger) : Deserializer<PportTimetableRef>(logger);
 }

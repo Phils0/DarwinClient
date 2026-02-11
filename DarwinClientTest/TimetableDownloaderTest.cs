@@ -39,7 +39,7 @@ namespace DarwinClient.Test
             var refData = await downloader.GetReference(DummyS3.TestDate, CancellationToken.None);
             
             Assert.NotNull(refData);
-            Assert.Equal("PPTimetable/20200429020643_ref_v3.xml.gz", refData.Name);
+            Assert.Equal("PPTimetable/20260201020500_ref_v4.xml.gz", refData.Name);
         }
         
         [Fact]
@@ -49,7 +49,7 @@ namespace DarwinClient.Test
             var refData = await downloader.GetLatestReference(CancellationToken.None);
             
             Assert.NotNull(refData);
-            Assert.Equal("PPTimetable/20200501020639_ref_v3.xml.gz", refData.Name);
+            Assert.Equal("PPTimetable/20260201020500_ref_v4.xml.gz", refData.Name);
         }
         
         [Fact(Skip = "Actual S3 calls, needs profile set")]
@@ -68,7 +68,7 @@ namespace DarwinClient.Test
             var timetable = await downloader.GetTimetable(DummyS3.TestDate, CancellationToken.None);
             
             Assert.NotNull(timetable);
-            Assert.Equal("PPTimetable/20200429020643_v8.xml.gz", timetable.Name);
+            Assert.Equal("PPTimetable/20260201020500_v8.xml.gz", timetable.Name);
         }
         
         [Fact]
@@ -78,7 +78,7 @@ namespace DarwinClient.Test
             var timetable = await downloader.GetLatestTimetable(CancellationToken.None);
             
             Assert.NotNull(timetable);
-            Assert.Equal("PPTimetable/20200501020639_v8.xml.gz", timetable.Name);
+            Assert.Equal("PPTimetable/20260201020500_v8.xml.gz", timetable.Name);
         }
     }
 }

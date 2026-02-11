@@ -21,7 +21,8 @@ namespace DarwinClient.Serialization
                     Logger.Debug("Deserialize {id}", id);
                     using var decompressionStream = new GZipStream(stream, CompressionMode.Decompress);
                     using var reader = new StreamReader(decompressionStream);
-                    return Serializer.Deserialize(reader) as T;
+                    var obj = Serializer.Deserialize(reader);
+                    return obj as T;
                 }
             }
             catch (Exception e)

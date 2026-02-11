@@ -21,11 +21,11 @@ namespace DarwinClient.Test.Serialization
         }
         
         [Fact]
-        public void DeserializationError()
+        public void DeserializationUnsupportedVersion()
         {
             var deserializer = new ReferenceDataDeserializer(Substitute.For<ILogger>());
-            using var stream = File.OpenRead(DummyS3.ReferenceDataV2);
-            Assert.Throws<DarwinException>(() => deserializer.Deserialize(stream, DummyS3.ReferenceDataV2));
+            using var stream = File.OpenRead(DummyS3.ReferenceDataV3);
+            Assert.Throws<DarwinException>(() => deserializer.Deserialize(stream, DummyS3.ReferenceDataV3));
         }
 
         [Fact]

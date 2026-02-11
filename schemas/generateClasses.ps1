@@ -2,7 +2,9 @@ $files = Get-ChildItem -Path $PSScriptRoot -Filter *.xsd;
 
 $schemas = "xsd";
 foreach ($f in $files){
-    if($f.Name -notmatch 'rttiPPTSchema_v1[1234567].xsd' && $f.Name -notmatch 'rttiCTTReferenceSchema_v3.xsd')
+    $isOldSchema = $f.Name -notmatch 'rttiPPTSchema_v1[1234567].xsd';
+    $isOldRefSchema = $f.Name -notmatch 'rttiCTTReferenceSchema_v3.xsd';
+    if( $isOldSchema -and $isOldRefSchema)
     {
         $schemas = $schemas + " " +  $f.Name; 
     }
