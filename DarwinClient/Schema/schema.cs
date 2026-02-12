@@ -20,1914 +20,6 @@ namespace DarwinClient.Schema {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4", IsNullable=false)]
-    public partial class PportTimetableRef {
-        
-        private LocationRef[] locationRefField;
-        
-        private TocRef[] tocRefField;
-        
-        private Reason[] lateRunningReasonsField;
-        
-        private Reason[] cancellationReasonsField;
-        
-        private Via[] viaField;
-        
-        private CISSource[] cISSourceField;
-        
-        private CategoryData[] loadingCategoriesField;
-        
-        private string timetableIdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("LocationRef")]
-        public LocationRef[] LocationRef {
-            get {
-                return this.locationRefField;
-            }
-            set {
-                this.locationRefField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("TocRef")]
-        public TocRef[] TocRef {
-            get {
-                return this.tocRefField;
-            }
-            set {
-                this.tocRefField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("Reason", IsNullable=false)]
-        public Reason[] LateRunningReasons {
-            get {
-                return this.lateRunningReasonsField;
-            }
-            set {
-                this.lateRunningReasonsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("Reason", IsNullable=false)]
-        public Reason[] CancellationReasons {
-            get {
-                return this.cancellationReasonsField;
-            }
-            set {
-                this.cancellationReasonsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Via")]
-        public Via[] Via {
-            get {
-                return this.viaField;
-            }
-            set {
-                this.viaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CISSource")]
-        public CISSource[] CISSource {
-            get {
-                return this.cISSourceField;
-            }
-            set {
-                this.cISSourceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("category", IsNullable=false)]
-        public CategoryData[] LoadingCategories {
-            get {
-                return this.loadingCategoriesField;
-            }
-            set {
-                this.loadingCategoriesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string timetableId {
-            get {
-                return this.timetableIdField;
-            }
-            set {
-                this.timetableIdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4", IsNullable=false)]
-    public partial class LocationRef {
-        
-        private string tplField;
-        
-        private string crsField;
-        
-        private string tocField;
-        
-        private string locnameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string crs {
-            get {
-                return this.crsField;
-            }
-            set {
-                this.crsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string toc {
-            get {
-                return this.tocField;
-            }
-            set {
-                this.tocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string locname {
-            get {
-                return this.locnameField;
-            }
-            set {
-                this.locnameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4")]
-    public partial class CategoryData {
-        
-        private string typicalDescriptionField;
-        
-        private string expectedDescriptionField;
-        
-        private string definitionField;
-        
-        private string colourField;
-        
-        private string imageField;
-        
-        private string codeField;
-        
-        private string nameField;
-        
-        private string tocField;
-        
-        /// <remarks/>
-        public string typicalDescription {
-            get {
-                return this.typicalDescriptionField;
-            }
-            set {
-                this.typicalDescriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string expectedDescription {
-            get {
-                return this.expectedDescriptionField;
-            }
-            set {
-                this.expectedDescriptionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string definition {
-            get {
-                return this.definitionField;
-            }
-            set {
-                this.definitionField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string colour {
-            get {
-                return this.colourField;
-            }
-            set {
-                this.colourField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string image {
-            get {
-                return this.imageField;
-            }
-            set {
-                this.imageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string code {
-            get {
-                return this.codeField;
-            }
-            set {
-                this.codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string toc {
-            get {
-                return this.tocField;
-            }
-            set {
-                this.tocField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4", IsNullable=false)]
-    public partial class Reason {
-        
-        private int codeField;
-        
-        private string reasontextField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int code {
-            get {
-                return this.codeField;
-            }
-            set {
-                this.codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string reasontext {
-            get {
-                return this.reasontextField;
-            }
-            set {
-                this.reasontextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4", IsNullable=false)]
-    public partial class TocRef {
-        
-        private string tocField;
-        
-        private string tocnameField;
-        
-        private string urlField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string toc {
-            get {
-                return this.tocField;
-            }
-            set {
-                this.tocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tocname {
-            get {
-                return this.tocnameField;
-            }
-            set {
-                this.tocnameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string url {
-            get {
-                return this.urlField;
-            }
-            set {
-                this.urlField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4", IsNullable=false)]
-    public partial class Via {
-        
-        private string atField;
-        
-        private string destField;
-        
-        private string loc1Field;
-        
-        private string loc2Field;
-        
-        private string viatextField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string at {
-            get {
-                return this.atField;
-            }
-            set {
-                this.atField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string dest {
-            get {
-                return this.destField;
-            }
-            set {
-                this.destField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string loc1 {
-            get {
-                return this.loc1Field;
-            }
-            set {
-                this.loc1Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string loc2 {
-            get {
-                return this.loc2Field;
-            }
-            set {
-                this.loc2Field = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string viatext {
-            get {
-                return this.viatextField;
-            }
-            set {
-                this.viatextField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlRefData/v4", IsNullable=false)]
-    public partial class CISSource {
-        
-        private string codeField;
-        
-        private string nameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string code {
-            get {
-                return this.codeField;
-            }
-            set {
-                this.codeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8", IsNullable=false)]
-    public partial class PportTimetable {
-        
-        private Schedule[] journeyField;
-        
-        private Association[] associationField;
-        
-        private string timetableIDField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Journey")]
-        public Schedule[] Journey {
-            get {
-                return this.journeyField;
-            }
-            set {
-                this.journeyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Association")]
-        public Association[] Association {
-            get {
-                return this.associationField;
-            }
-            set {
-                this.associationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string timetableID {
-            get {
-                return this.timetableIDField;
-            }
-            set {
-                this.timetableIDField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class Schedule {
-        
-        private object[] itemsField;
-        
-        private DisruptionReasonType cancelReasonField;
-        
-        private string ridField;
-        
-        private string uidField;
-        
-        private string trainIdField;
-        
-        private System.DateTime ssdField;
-        
-        private string tocField;
-        
-        private string statusField;
-        
-        private string trainCatField;
-        
-        private bool isPassengerSvcField;
-        
-        private bool deletedField;
-        
-        private bool isCharterField;
-        
-        private bool qtrainField;
-        
-        private bool canField;
-        
-        public Schedule() {
-            this.statusField = "P";
-            this.trainCatField = "OO";
-            this.isPassengerSvcField = true;
-            this.deletedField = false;
-            this.isCharterField = false;
-            this.qtrainField = false;
-            this.canField = false;
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("DT", typeof(DT))]
-        [System.Xml.Serialization.XmlElementAttribute("IP", typeof(IP))]
-        [System.Xml.Serialization.XmlElementAttribute("OPDT", typeof(OPDT))]
-        [System.Xml.Serialization.XmlElementAttribute("OPIP", typeof(OPIP))]
-        [System.Xml.Serialization.XmlElementAttribute("OPOR", typeof(OPOR))]
-        [System.Xml.Serialization.XmlElementAttribute("OR", typeof(OR))]
-        [System.Xml.Serialization.XmlElementAttribute("PP", typeof(PP))]
-        public object[] Items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public DisruptionReasonType cancelReason {
-            get {
-                return this.cancelReasonField;
-            }
-            set {
-                this.cancelReasonField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string rid {
-            get {
-                return this.ridField;
-            }
-            set {
-                this.ridField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string uid {
-            get {
-                return this.uidField;
-            }
-            set {
-                this.uidField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string trainId {
-            get {
-                return this.trainIdField;
-            }
-            set {
-                this.trainIdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="date")]
-        public System.DateTime ssd {
-            get {
-                return this.ssdField;
-            }
-            set {
-                this.ssdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string toc {
-            get {
-                return this.tocField;
-            }
-            set {
-                this.tocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("P")]
-        public string status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("OO")]
-        public string trainCat {
-            get {
-                return this.trainCatField;
-            }
-            set {
-                this.trainCatField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(true)]
-        public bool isPassengerSvc {
-            get {
-                return this.isPassengerSvcField;
-            }
-            set {
-                this.isPassengerSvcField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool deleted {
-            get {
-                return this.deletedField;
-            }
-            set {
-                this.deletedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool isCharter {
-            get {
-                return this.isCharterField;
-            }
-            set {
-                this.isCharterField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool qtrain {
-            get {
-                return this.qtrainField;
-            }
-            set {
-                this.qtrainField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class DT {
-        
-        private string tplField;
-        
-        private string actField;
-        
-        private string planActField;
-        
-        private bool canField;
-        
-        private string platField;
-        
-        private string ptaField;
-        
-        private string ptdField;
-        
-        private string wtaField;
-        
-        private string wtdField;
-        
-        private short rdelayField;
-        
-        public DT() {
-            this.actField = "  ";
-            this.canField = false;
-            this.rdelayField = ((short)(0));
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("  ")]
-        public string act {
-            get {
-                return this.actField;
-            }
-            set {
-                this.actField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string planAct {
-            get {
-                return this.planActField;
-            }
-            set {
-                this.planActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string plat {
-            get {
-                return this.platField;
-            }
-            set {
-                this.platField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string pta {
-            get {
-                return this.ptaField;
-            }
-            set {
-                this.ptaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ptd {
-            get {
-                return this.ptdField;
-            }
-            set {
-                this.ptdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wta {
-            get {
-                return this.wtaField;
-            }
-            set {
-                this.wtaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtd {
-            get {
-                return this.wtdField;
-            }
-            set {
-                this.wtdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(short), "0")]
-        public short rdelay {
-            get {
-                return this.rdelayField;
-            }
-            set {
-                this.rdelayField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class IP {
-        
-        private string tplField;
-        
-        private string actField;
-        
-        private string planActField;
-        
-        private bool canField;
-        
-        private string platField;
-        
-        private string ptaField;
-        
-        private string ptdField;
-        
-        private string wtaField;
-        
-        private string wtdField;
-        
-        private short rdelayField;
-        
-        private string fdField;
-        
-        public IP() {
-            this.actField = "  ";
-            this.canField = false;
-            this.rdelayField = ((short)(0));
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("  ")]
-        public string act {
-            get {
-                return this.actField;
-            }
-            set {
-                this.actField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string planAct {
-            get {
-                return this.planActField;
-            }
-            set {
-                this.planActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string plat {
-            get {
-                return this.platField;
-            }
-            set {
-                this.platField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string pta {
-            get {
-                return this.ptaField;
-            }
-            set {
-                this.ptaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ptd {
-            get {
-                return this.ptdField;
-            }
-            set {
-                this.ptdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wta {
-            get {
-                return this.wtaField;
-            }
-            set {
-                this.wtaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtd {
-            get {
-                return this.wtdField;
-            }
-            set {
-                this.wtdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(short), "0")]
-        public short rdelay {
-            get {
-                return this.rdelayField;
-            }
-            set {
-                this.rdelayField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string fd {
-            get {
-                return this.fdField;
-            }
-            set {
-                this.fdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class OPDT {
-        
-        private string tplField;
-        
-        private string actField;
-        
-        private string planActField;
-        
-        private bool canField;
-        
-        private string platField;
-        
-        private string wtaField;
-        
-        private string wtdField;
-        
-        private short rdelayField;
-        
-        public OPDT() {
-            this.actField = "  ";
-            this.canField = false;
-            this.rdelayField = ((short)(0));
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("  ")]
-        public string act {
-            get {
-                return this.actField;
-            }
-            set {
-                this.actField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string planAct {
-            get {
-                return this.planActField;
-            }
-            set {
-                this.planActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string plat {
-            get {
-                return this.platField;
-            }
-            set {
-                this.platField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wta {
-            get {
-                return this.wtaField;
-            }
-            set {
-                this.wtaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtd {
-            get {
-                return this.wtdField;
-            }
-            set {
-                this.wtdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(short), "0")]
-        public short rdelay {
-            get {
-                return this.rdelayField;
-            }
-            set {
-                this.rdelayField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class OPIP {
-        
-        private string tplField;
-        
-        private string actField;
-        
-        private string planActField;
-        
-        private bool canField;
-        
-        private string platField;
-        
-        private string wtaField;
-        
-        private string wtdField;
-        
-        private short rdelayField;
-        
-        public OPIP() {
-            this.actField = "  ";
-            this.canField = false;
-            this.rdelayField = ((short)(0));
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("  ")]
-        public string act {
-            get {
-                return this.actField;
-            }
-            set {
-                this.actField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string planAct {
-            get {
-                return this.planActField;
-            }
-            set {
-                this.planActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string plat {
-            get {
-                return this.platField;
-            }
-            set {
-                this.platField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wta {
-            get {
-                return this.wtaField;
-            }
-            set {
-                this.wtaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtd {
-            get {
-                return this.wtdField;
-            }
-            set {
-                this.wtdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(short), "0")]
-        public short rdelay {
-            get {
-                return this.rdelayField;
-            }
-            set {
-                this.rdelayField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class OPOR {
-        
-        private string tplField;
-        
-        private string actField;
-        
-        private string planActField;
-        
-        private bool canField;
-        
-        private string platField;
-        
-        private string wtaField;
-        
-        private string wtdField;
-        
-        public OPOR() {
-            this.actField = "  ";
-            this.canField = false;
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("  ")]
-        public string act {
-            get {
-                return this.actField;
-            }
-            set {
-                this.actField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string planAct {
-            get {
-                return this.planActField;
-            }
-            set {
-                this.planActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string plat {
-            get {
-                return this.platField;
-            }
-            set {
-                this.platField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wta {
-            get {
-                return this.wtaField;
-            }
-            set {
-                this.wtaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtd {
-            get {
-                return this.wtdField;
-            }
-            set {
-                this.wtdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class OR {
-        
-        private string tplField;
-        
-        private string actField;
-        
-        private string planActField;
-        
-        private bool canField;
-        
-        private string platField;
-        
-        private string ptaField;
-        
-        private string ptdField;
-        
-        private string wtaField;
-        
-        private string wtdField;
-        
-        private string fdField;
-        
-        public OR() {
-            this.actField = "  ";
-            this.canField = false;
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("  ")]
-        public string act {
-            get {
-                return this.actField;
-            }
-            set {
-                this.actField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string planAct {
-            get {
-                return this.planActField;
-            }
-            set {
-                this.planActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string plat {
-            get {
-                return this.platField;
-            }
-            set {
-                this.platField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string pta {
-            get {
-                return this.ptaField;
-            }
-            set {
-                this.ptaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ptd {
-            get {
-                return this.ptdField;
-            }
-            set {
-                this.ptdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wta {
-            get {
-                return this.wtaField;
-            }
-            set {
-                this.wtaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtd {
-            get {
-                return this.wtdField;
-            }
-            set {
-                this.wtdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string fd {
-            get {
-                return this.fdField;
-            }
-            set {
-                this.fdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class PP {
-        
-        private string tplField;
-        
-        private string actField;
-        
-        private string planActField;
-        
-        private bool canField;
-        
-        private string platField;
-        
-        private string wtpField;
-        
-        private short rdelayField;
-        
-        public PP() {
-            this.actField = "  ";
-            this.canField = false;
-            this.rdelayField = ((short)(0));
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tpl {
-            get {
-                return this.tplField;
-            }
-            set {
-                this.tplField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute("  ")]
-        public string act {
-            get {
-                return this.actField;
-            }
-            set {
-                this.actField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string planAct {
-            get {
-                return this.planActField;
-            }
-            set {
-                this.planActField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool can {
-            get {
-                return this.canField;
-            }
-            set {
-                this.canField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string plat {
-            get {
-                return this.platField;
-            }
-            set {
-                this.platField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtp {
-            get {
-                return this.wtpField;
-            }
-            set {
-                this.wtpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(typeof(short), "0")]
-        public short rdelay {
-            get {
-                return this.rdelayField;
-            }
-            set {
-                this.rdelayField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v1")]
-    public partial class DisruptionReasonType {
-        
-        private string tiplocField;
-        
-        private bool nearField;
-        
-        private short valueField;
-        
-        public DisruptionReasonType() {
-            this.nearField = false;
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tiploc {
-            get {
-                return this.tiplocField;
-            }
-            set {
-                this.tiplocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool near {
-            get {
-                return this.nearField;
-            }
-            set {
-                this.nearField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public short Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class Association {
-        
-        private AssocService mainField;
-        
-        private AssocService assocField;
-        
-        private string tiplocField;
-        
-        private CategoryType categoryField;
-        
-        private bool isCancelledField;
-        
-        private bool isDeletedField;
-        
-        public Association() {
-            this.isCancelledField = false;
-            this.isDeletedField = false;
-        }
-        
-        /// <remarks/>
-        public AssocService main {
-            get {
-                return this.mainField;
-            }
-            set {
-                this.mainField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public AssocService assoc {
-            get {
-                return this.assocField;
-            }
-            set {
-                this.assocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string tiploc {
-            get {
-                return this.tiplocField;
-            }
-            set {
-                this.tiplocField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public CategoryType category {
-            get {
-                return this.categoryField;
-            }
-            set {
-                this.categoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool isCancelled {
-            get {
-                return this.isCancelledField;
-            }
-            set {
-                this.isCancelledField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        [System.ComponentModel.DefaultValueAttribute(false)]
-        public bool isDeleted {
-            get {
-                return this.isDeletedField;
-            }
-            set {
-                this.isDeletedField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public partial class AssocService {
-        
-        private string ridField;
-        
-        private string wtaField;
-        
-        private string wtdField;
-        
-        private string wtpField;
-        
-        private string ptaField;
-        
-        private string ptdField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string rid {
-            get {
-                return this.ridField;
-            }
-            set {
-                this.ridField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wta {
-            get {
-                return this.wtaField;
-            }
-            set {
-                this.wtaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtd {
-            get {
-                return this.wtdField;
-            }
-            set {
-                this.wtdField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string wtp {
-            get {
-                return this.wtpField;
-            }
-            set {
-                this.wtpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string pta {
-            get {
-                return this.ptaField;
-            }
-            set {
-                this.ptaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ptd {
-            get {
-                return this.ptdField;
-            }
-            set {
-                this.ptdField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/XmlTimetable/v8")]
-    public enum CategoryType {
-        
-        /// <remarks/>
-        JJ,
-        
-        /// <remarks/>
-        VV,
-        
-        /// <remarks/>
-        LK,
-        
-        /// <remarks/>
-        NP,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://thalesgroup.com/RTTI/PushPortFilter/root_1")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace="http://thalesgroup.com/RTTI/PushPortFilter/root_1", IsNullable=false)]
     public partial class FilterTiplocs {
@@ -2234,11 +326,11 @@ namespace DarwinClient.Schema {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/PushPort/v18")]
     public partial class DataResponse {
         
-        private Schedule5[] scheduleField;
+        private Schedule4[] scheduleField;
         
         private DeactivatedSchedule1[] deactivatedField;
         
-        private Association2[] associationField;
+        private Association1[] associationField;
         
         private ScheduleFormations1[] scheduleFormationsField;
         
@@ -2260,7 +352,7 @@ namespace DarwinClient.Schema {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("schedule")]
-        public Schedule5[] schedule {
+        public Schedule4[] schedule {
             get {
                 return this.scheduleField;
             }
@@ -2282,7 +374,7 @@ namespace DarwinClient.Schema {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("association")]
-        public Association2[] association {
+        public Association1[] association {
             get {
                 return this.associationField;
             }
@@ -2397,7 +489,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="Schedule", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class Schedule5 {
+    public partial class Schedule4 {
         
         private object[] itemsField;
         
@@ -2431,7 +523,7 @@ namespace DarwinClient.Schema {
         
         private bool isCharterField;
         
-        public Schedule5() {
+        public Schedule4() {
             this.statusField = "P";
             this.trainCatField = "OO";
             this.isPassengerSvcField = true;
@@ -2441,13 +533,13 @@ namespace DarwinClient.Schema {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("DT", typeof(DT5))]
-        [System.Xml.Serialization.XmlElementAttribute("IP", typeof(IP5))]
-        [System.Xml.Serialization.XmlElementAttribute("OPDT", typeof(OPDT5))]
-        [System.Xml.Serialization.XmlElementAttribute("OPIP", typeof(OPIP5))]
-        [System.Xml.Serialization.XmlElementAttribute("OPOR", typeof(OPOR5))]
-        [System.Xml.Serialization.XmlElementAttribute("OR", typeof(OR5))]
-        [System.Xml.Serialization.XmlElementAttribute("PP", typeof(PP5))]
+        [System.Xml.Serialization.XmlElementAttribute("DT", typeof(DT4))]
+        [System.Xml.Serialization.XmlElementAttribute("IP", typeof(IP4))]
+        [System.Xml.Serialization.XmlElementAttribute("OPDT", typeof(OPDT4))]
+        [System.Xml.Serialization.XmlElementAttribute("OPIP", typeof(OPIP4))]
+        [System.Xml.Serialization.XmlElementAttribute("OPOR", typeof(OPOR4))]
+        [System.Xml.Serialization.XmlElementAttribute("OR", typeof(OR4))]
+        [System.Xml.Serialization.XmlElementAttribute("PP", typeof(PP4))]
         public object[] Items {
             get {
                 return this.itemsField;
@@ -2632,7 +724,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="DT", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class DT5 {
+    public partial class DT4 {
         
         private DisruptionReasonType cancelReasonField;
         
@@ -2662,7 +754,7 @@ namespace DarwinClient.Schema {
         
         private short rdelayField;
         
-        public DT5() {
+        public DT4() {
             this.actField = "  ";
             this.canField = false;
             this.affectedByDiversionField = false;
@@ -2832,8 +924,61 @@ namespace DarwinClient.Schema {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.thalesgroup.com/rtti/PushPort/CommonTypes/v1")]
+    public partial class DisruptionReasonType {
+        
+        private string tiplocField;
+        
+        private bool nearField;
+        
+        private short valueField;
+        
+        public DisruptionReasonType() {
+            this.nearField = false;
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string tiploc {
+            get {
+                return this.tiplocField;
+            }
+            set {
+                this.tiplocField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.ComponentModel.DefaultValueAttribute(false)]
+        public bool near {
+            get {
+                return this.nearField;
+            }
+            set {
+                this.nearField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public short Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="IP", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class IP5 {
+    public partial class IP4 {
         
         private DisruptionReasonType cancelReasonField;
         
@@ -2865,7 +1010,7 @@ namespace DarwinClient.Schema {
         
         private string fdField;
         
-        public IP5() {
+        public IP4() {
             this.actField = "  ";
             this.canField = false;
             this.affectedByDiversionField = false;
@@ -3047,7 +1192,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="OPDT", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class OPDT5 {
+    public partial class OPDT4 {
         
         private DisruptionReasonType cancelReasonField;
         
@@ -3069,7 +1214,7 @@ namespace DarwinClient.Schema {
         
         private short rdelayField;
         
-        public OPDT5() {
+        public OPDT4() {
             this.actField = "  ";
             this.canField = false;
             this.affectedByDiversionField = false;
@@ -3196,7 +1341,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="OPIP", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class OPIP5 {
+    public partial class OPIP4 {
         
         private DisruptionReasonType cancelReasonField;
         
@@ -3218,7 +1363,7 @@ namespace DarwinClient.Schema {
         
         private short rdelayField;
         
-        public OPIP5() {
+        public OPIP4() {
             this.actField = "  ";
             this.canField = false;
             this.affectedByDiversionField = false;
@@ -3345,7 +1490,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="OPOR", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class OPOR5 {
+    public partial class OPOR4 {
         
         private DisruptionReasonType cancelReasonField;
         
@@ -3365,7 +1510,7 @@ namespace DarwinClient.Schema {
         
         private string wtdField;
         
-        public OPOR5() {
+        public OPOR4() {
             this.actField = "  ";
             this.canField = false;
             this.affectedByDiversionField = false;
@@ -3479,7 +1624,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="OR", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class OR5 {
+    public partial class OR4 {
         
         private DisruptionReasonType cancelReasonField;
         
@@ -3509,7 +1654,7 @@ namespace DarwinClient.Schema {
         
         private string fdField;
         
-        public OR5() {
+        public OR4() {
             this.actField = "  ";
             this.canField = false;
             this.affectedByDiversionField = false;
@@ -3678,7 +1823,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="PP", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v5")]
-    public partial class PP5 {
+    public partial class PP4 {
         
         private DisruptionReasonType cancelReasonField;
         
@@ -3698,7 +1843,7 @@ namespace DarwinClient.Schema {
         
         private short rdelayField;
         
-        public PP5() {
+        public PP4() {
             this.actField = "  ";
             this.canField = false;
             this.affectedByDiversionField = false;
@@ -3836,27 +1981,27 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="Association", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v2")]
-    public partial class Association2 {
+    public partial class Association1 {
         
-        private AssocService2 mainField;
+        private AssocService1 mainField;
         
-        private AssocService2 assocField;
+        private AssocService1 assocField;
         
         private string tiplocField;
         
-        private CategoryType2 categoryField;
+        private CategoryType1 categoryField;
         
         private bool isCancelledField;
         
         private bool isDeletedField;
         
-        public Association2() {
+        public Association1() {
             this.isCancelledField = false;
             this.isDeletedField = false;
         }
         
         /// <remarks/>
-        public AssocService2 main {
+        public AssocService1 main {
             get {
                 return this.mainField;
             }
@@ -3866,7 +2011,7 @@ namespace DarwinClient.Schema {
         }
         
         /// <remarks/>
-        public AssocService2 assoc {
+        public AssocService1 assoc {
             get {
                 return this.assocField;
             }
@@ -3888,7 +2033,7 @@ namespace DarwinClient.Schema {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public CategoryType2 category {
+        public CategoryType1 category {
             get {
                 return this.categoryField;
             }
@@ -3928,7 +2073,7 @@ namespace DarwinClient.Schema {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="AssocService", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v2")]
-    public partial class AssocService2 {
+    public partial class AssocService1 {
         
         private string ridField;
         
@@ -4013,7 +2158,7 @@ namespace DarwinClient.Schema {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.9032.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="CategoryType", Namespace="http://www.thalesgroup.com/rtti/PushPort/Schedules/v2")]
-    public enum CategoryType2 {
+    public enum CategoryType1 {
         
         /// <remarks/>
         JJ,

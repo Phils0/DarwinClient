@@ -1,4 +1,4 @@
-﻿using DarwinClient.Schema;
+﻿using DarwinClient.Schema.TimetableReference;
 
 namespace DarwinClient
 {
