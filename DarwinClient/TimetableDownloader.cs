@@ -72,7 +72,7 @@ namespace DarwinClient
             var extractor = new ReferenceDataDeserializer(log);
             var data = extractor.Deserialize(stream, name);
 
-            return new TimetableReferenceFile(name, data);
+            return new TimetableReferenceFile(name, timetableRefVersion, data);
         }
         
         public async Task<TimetableReferenceFile> GetLatestReference(CancellationToken token)
@@ -95,7 +95,7 @@ namespace DarwinClient
             var extractor = new TimetableDeserializer(log);
             var data = extractor.Deserialize(stream, name);
             
-            return new TimetableFile(name, data);
+            return new TimetableFile(name, timetableVersion, data);
         }
 
         public async Task<TimetableFile> GetLatestTimetable(CancellationToken token)

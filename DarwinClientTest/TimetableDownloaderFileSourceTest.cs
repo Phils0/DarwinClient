@@ -25,6 +25,7 @@ namespace DarwinClient.Test
             
             Assert.NotNull(refData);
             Assert.Equal("20260201020500_ref_v4.xml.gz", refData.Name);
+            Assert.Equal(4, refData.Version);
         }
         
         [Fact]
@@ -35,6 +36,7 @@ namespace DarwinClient.Test
             
             Assert.NotNull(refData);
             Assert.Equal("20260201020500_ref_v4.xml.gz", refData.Name);
+            Assert.Equal(4, refData.Version);
         }
         
         [Fact]
@@ -45,6 +47,7 @@ namespace DarwinClient.Test
             
             Assert.NotNull(timetable);
             Assert.Equal("20260201020500_v8.xml.gz", timetable.Name);
+            Assert.Equal(8, timetable.Version);
         }
         
         [Fact]
@@ -55,6 +58,7 @@ namespace DarwinClient.Test
             
             Assert.NotNull(timetable);
             Assert.Equal("20260201020500_v8.xml.gz", timetable.Name);
+            Assert.Equal(8, timetable.Version);
         }
     }
 }

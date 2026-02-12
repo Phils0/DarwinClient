@@ -1,8 +1,8 @@
-﻿using DarwinClient.Schema;
+﻿using DarwinClient.Schema.Timetable;
 
 namespace DarwinClient
 {
-    public record TimetableFile(string Name, PportTimetable? Data)
+    public record TimetableFile(string Name, int Version, PportTimetable? Data)
     {
         public override string ToString() => Name;
     }

@@ -1,4 +1,4 @@
-﻿using DarwinClient.Schema;
+﻿using DarwinClient.Schema.TimetableReference;
 using Serilog;
 
 namespace DarwinClient.Serialization
